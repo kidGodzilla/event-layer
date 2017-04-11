@@ -147,8 +147,9 @@ Something you feel is missing? Open an issue (Although we may not be able to get
 
 ## Todos
 
-[] **NPM Package**
-[] Publish to **cdn.js**
+[ ] **NPM Package**
+
+[ ] Publish to **cdn.js**
 
 
 ## Why is it called ‘Electric Love’?
