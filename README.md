@@ -1,5 +1,5 @@
 # Electric Love
-An analytics abstraction layer. Write your events once, then send them where ever you want.
+A very very simple abstraction layer for analytics code. Write your events once, then send them where ever you want.
 
 ## What is it?
 
