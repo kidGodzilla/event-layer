@@ -80,7 +80,8 @@ Below is an example of a blank adapter.
 
 It has three main components:
 
-**1. Test:** This function, once evaluated, should provide an answer to the question “has a specific third-party analytics library been installed on this page? Is it active? Should we try to send events to this service?” 
+### 1. Test:
+This function, once evaluated, should provide an answer to the question “has a specific third-party analytics library been installed on this page? Is it active? Should we try to send events to this service?” 
 
 This can be as simple as sniffing the window object for a global variables, and a commonly-used (and not likely to disappear) method or property:
 
@@ -92,7 +93,8 @@ test: function () {
 
 (A simple example taken from the Google Analytics adapter)
 
-**2. onIdentify:** This function takes data from our generic `identify` method, and passes it along to a third-party library, via an adapter.
+### 2. onIdentify:
+This function takes data from our generic `identify` method, and passes it along to a third-party library, via an adapter.
 
 This should contain a minimal number of integrity checks and transforms, as well as a lightweight wrapper for the library's identify and/or describe functionality.
 
@@ -110,7 +112,8 @@ onIdentify: function (userId, userProperties) {
 
 (A simple example taken from the Mixpanel adapter)
 
-**3. onTrack:** This function takes data from our generic `track` method, and passes it along to a third-party library, via an adapter.
+### 3. onTrack:
+This function takes data from our generic `track` method, and passes it along to a third-party library, via an adapter.
 
 This should contain a minimal number of integrity checks and transforms, as well as a lightweight wrapper for the library's event tracking functionality.
 
