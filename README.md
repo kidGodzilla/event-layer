@@ -130,12 +130,19 @@ onTrack: function (eventName, eventProperties) {
 
 ## Pull Requests
 
-Todo
+**Yes, Please & Thank you!**
+
+To keep things organized, please open an issue for discussion before putting too much work into a pull request. I would feel really bad if you put a lot of work into something, only for it to not make sense to include it or merge the Pull Request.
+
+Also, to help keep things organized, try to submit individual pull requests for each issue, and keep the scope of each issue relatively small.
+
+For example, if you wanted to add a couple of new adapters, split them into multiple pull requests so we can review them individually.
 
 
 ## Issues
 
-Todo
+Something feel broken? Open an issue!
+Something you feel is missing? Open an issue (Although we may not be able to get to everything, pull requests are most welcome!)
 
 
 ### Thanks!
