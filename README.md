@@ -147,7 +147,7 @@ Something you feel is missing? Open an issue (Although we may not be able to get
 
 ## Why is it called ‘Electric Love’?
 
-No reason. Naming things is hard. https://youtu.be/RjmU-fou_6A is a pretty cool song (From the Bob's Burgers soundtrack).
+No reason. Naming things is hard. Also https://youtu.be/RjmU-fou_6A is a pretty cool song (From the Bob's Burgers soundtrack).
 
 
 # Thanks!
