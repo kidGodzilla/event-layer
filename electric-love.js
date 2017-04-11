@@ -3,7 +3,7 @@
      * Third-party adapters for Gumshoe.track()
      */
     var thirdPartyAdapters = {
-        'Segment': {
+        'segment': {
             enabled: true,
             test: function () {
                 return window.analytics && window.analytics.Integrations && typeof(window.analytics.Integrations) === 'object';
@@ -12,6 +12,7 @@
                 // Send the identify call to Segment's Analytics.js library
                 // console.log('Identifying: ', userId, userProperties);
                 if (window.analytics && userId) analytics.identify(userId, userProperties);
+
             },
             onTrack: function (eventName, eventProperties) {
                 // Send the tracked event to Segment's Analytics.js library
@@ -19,7 +20,7 @@
                 if (window.analytics && eventName) analytics.track(eventName, eventProperties);
             }
         },
-        'Mixpanel': {
+        'mixpanel': {
             enabled: true,
             test: function () {
                 return window.mixpanel && window.mixpanel.__loaded;
@@ -38,7 +39,7 @@
                 if (window.mixpanel && eventName) mixpanel.track(eventName, eventProperties);
             }
         },
-        'Heap': {
+        'heap': {
             enabled: true,
             test: function () {
                 return (window.heap && window.heap.track) ? true : false;
@@ -57,7 +58,7 @@
                 if (window.heap && eventName) heap.track(eventName, eventProperties);
             }
         },
-        'Intercom': {
+        'intercom': {
             enabled: true,
             test: function () {
                 return (window.Intercom && window.Intercom('getVisitorId')) ? true : false;
@@ -79,7 +80,7 @@
                     Intercom('trackEvent', eventName, eventProperties);
             }
         },
-        'Amplitude': {
+        'amplitude': {
             enabled: true,
             test: function () {
                 return (window.amplitude && window.amplitude.options) ? true : false;
@@ -98,13 +99,13 @@
                 if (window.amplitude && eventName) amplitude.getInstance().logEvent(eventName, eventProperties);
             }
         },
-        'GoogleAnalytics': {
+        'google-analytics': {
             enabled: true,
             test: function () {
                 return window.ga && window.ga.loaded;
             },
             onIdentify: function (userId, userProperties) {
-                // Do nothing, because, Google Analytics :(
+                // Do nothing, because, google analytics :(
             },
             onTrack: function (eventName, eventProperties) {
                 if (window.ga) ga('send', {
@@ -114,8 +115,24 @@
                 });
             }
         },
+        'keen': { // Do not modify this template
+            enabled: true,
+            test: function () {
+                return window.Keen && window.Keen.loaded && window.client;
+            },
+            onIdentify: function (userId, userProperties) {
+                if (window.client && userId) client.extendEvents({
+                    'user_id': userId
+                });
+
+                if (window.client && userProperties) client.extendEvents(userProperties);
+            },
+            onTrack: function (eventName, eventProperties) {
+                if (window.client && eventName) client.recordEvent(eventName, eventProperties);
+            }
+        },
         'blank-adapter-template': { // Do not modify this template
-            enabled: false, // Change to true once you're completed testing
+            enabled: false,
             test: function () {},
             onIdentify: function (userId, userProperties) {},
             onTrack: function (eventName, eventProperties) {}
