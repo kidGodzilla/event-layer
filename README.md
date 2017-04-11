@@ -71,11 +71,11 @@ Below is an example of a blank adapter.
 
 ```
 'blank-adapter-template': { // Do not modify this template
-            enabled: false, // Change to true once you're completed testing
-            test: function () {},
-            onIdentify: function (userId, userProperties) {},
-            onTrack: function (eventName, eventProperties) {}
-        }
+    enabled: false, // Change to true once you're completed testing
+    test: function () {},
+    onIdentify: function (userId, userProperties) {},
+    onTrack: function (eventName, eventProperties) {}
+}
 ```
 
 It has three main components:
