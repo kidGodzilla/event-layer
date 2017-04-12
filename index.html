@@ -35,6 +35,10 @@
 
 <article class="markdown-body entry-content" itemprop="text"><h1><a id="user-content-electric-love" class="anchor" href="#electric-love" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Electric Love</h1>
     <p>A very very simple abstraction layer for analytics code. Write your events once, then send them where ever you want.</p>
+
+    <a href="#demo">Scroll Down for a Demo</a>
+
+
     <h2><a id="user-content-what-is-it" class="anchor" href="#what-is-it" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>What is it?</h2>
     <p><strong>“Electric Love”</strong> is an extensible abstraction layer for working with common third-party Analytics libraries.</p>
     <p>Since more or less all analytics libraries work the same way (allowing you to identify and describe users, and track the events which they perform),
@@ -63,7 +67,7 @@
 <pre><code>Analytics.identify('&lt;unique-user-id&gt;', {
     name: 'John Doe',
     subscribedToNewsletter: false
-    });
+});
 </code></pre>
     <p>This is similar to the <code>Identify</code> method found in Mixpanel, Heap, and Analytics.js.</p>
     <h2><a id="user-content-electriclovetrackeventname-eventproperties" class="anchor" href="#electriclovetrackeventname-eventproperties" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ElectricLove.track(eventName, eventProperties)</h2>
@@ -76,7 +80,7 @@
     amount: 32.00,
     itemCount: 4,
     shippingSpeed: 'next-day'
-    });
+});
 </code></pre>
     <p>This is similar to the <code>Track</code> method found in Mixpanel, Heap, and Analytics.js.</p>
     <h2><a id="user-content-writing-an-adapter" class="anchor" href="#writing-an-adapter" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Writing an Adapter</h2>
@@ -86,7 +90,7 @@
     test: function () {},
     onIdentify: function (userId, userProperties) {},
     onTrack: function (eventName, eventProperties) {}
-    }
+}
 </code></pre>
 
     <div class="indent">
@@ -96,7 +100,7 @@
         <p>This can be as simple as sniffing the window object for a global variables, and a commonly-used (and not likely to disappear) method or property:</p>
 <pre><code>test: function () {
     return window.ga &amp;&amp; window.ga.loaded;
-    }
+}
 </code></pre>
         <p>(A simple example taken from the Google Analytics adapter)</p>
         <h3><a id="user-content-2-onidentify" class="anchor" href="#2-onidentify" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. onIdentify:</h3>
@@ -110,7 +114,7 @@
     // Set people properties on our identified user
     if (window.mixpanel &amp;&amp; userProperties)
     mixpanel.people.set(userProperties);
-    }
+}
 </code></pre>
         <p>(A simple example taken from the Mixpanel adapter)</p>
         <h3><a id="user-content-3-ontrack" class="anchor" href="#3-ontrack" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. onTrack:</h3>
@@ -120,7 +124,7 @@
     // Send the tracked event to Heap's JS library
     if (window.heap &amp;&amp; eventName)
     heap.track(eventName, eventProperties);
-    }
+}
 </code></pre>
         <p>(A simple example taken from the Heap Analytics adapter)</p>
     </div>
@@ -133,9 +137,7 @@
     <h2><a id="user-content-issues" class="anchor" href="#issues" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Issues</h2>
     <p>Something feel broken? Open an issue!
         Something you feel is missing? Open an issue (Although we may not be able to get to everything, pull requests are most welcome!)</p>
-    <h2><a id="user-content-todos" class="anchor" href="#todos" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Todos</h2>
-    <p>[ ] <strong>NPM Package</strong></p>
-    <p>[ ] Publish to <strong>cdn.js</strong></p>
+
     <h2><a id="user-content-why-is-it-called-electric-love" class="anchor" href="#why-is-it-called-electric-love" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Why is it called ‘Electric Love’?</h2>
     <p>No reason. Naming things is hard. Also <a href="https://youtu.be/RjmU-fou_6A">https://youtu.be/RjmU-fou_6A</a> is a pretty cool song (From the Bob's Burgers soundtrack).</p>
     <h2><a id="user-content-thanks" class="anchor" href="#thanks" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Thanks!</h2>
@@ -143,7 +145,9 @@
 
 <hr style="margin-top: 100px" />
 
-<h2 style="margin-bottom: 15px">Demo:</h2>
+<h2 id="demo" style="margin-bottom: 15px">Demo:</h2>
+
+<p>(You'll have to inspect this page to see how the demo works)</p>
 
 <button onclick="Analytics.track('button_clicked');alert('Event `button_clicked` tracked (you can inspect it in the network tab of your console)');">Click me</button>
 
