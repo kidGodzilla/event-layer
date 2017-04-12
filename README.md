@@ -14,10 +14,20 @@ configuration later to send your data anywhere you need.
 
 1. Install your third-party analytics libraries in your application or website (you don't need to do anything special)
 2. Install `electric-love.js` in your website or app.
-3. Instead of filling your app or website with service-specific tracking code, write generic code using the **“Electric Love” Javascript API** (described below).
-4. **“Electric Love”** will detect the third-party Analytics services you have installed on your website or app, and use it's own, community-maintained adapters to propagate your events, in an identical format, to each third-party service, using the latest version(s) of their APIs.
-5. **(Optional):** You can extend **“Electric Love”** by writing your own custom adapters for third-party services not yet supported. Each adapter only requires about 12 lines of Javascript, and the community is available to help you ship your first PR to **“Electric Love”**.
+3. Instantiate a new instance of **ElectricLove:** (e.g. `var Analytics = new ElectricLove();`).
+4. Instead of filling your app or website with service-specific tracking code, write generic code using the **“Electric Love” Javascript API** (described below).
+5. **“Electric Love”** will detect the third-party Analytics services you have installed on your website or app, and use it's own, community-maintained adapters to propagate your events, in an identical format, to each third-party service, using the latest version(s) of their APIs.
+6. **(Optional):** You can extend **“Electric Love”** by writing your own custom adapters for third-party services not yet supported. Each adapter only requires about 12 lines of Javascript, and the community is available to help you ship your first PR to **“Electric Love”**.
 
+
+## Instantiating a new instance of ElectricLove
+We realize that not everyone wants to litter their code with calls to a global named **“Electric Love”**. So you'll probably want to start off by instantiating a new instance of **“Electric Love”**.
+
+```
+var Analytics = new ElectricLove();
+```
+
+You can name it whatever you like, but the examples given below will need to be modified appropriately.
 
 ## ElectricLove.identify(userId, userProperties)
 
@@ -26,14 +36,14 @@ This method allows you to identify the current visitor, and (optionally) describ
 _Only identify the user, do not describe any user properties:_
 
 ```
-ElectricLove.identify('<unique-user-id>');
+Analytics.identify('<unique-user-id>');
 ```
 
 
 _Identify the user and describe user properties:_
 
 ```
-ElectricLove.identify('<unique-user-id>', {
+Analytics.identify('<unique-user-id>', {
     name: 'John Doe',
     subscribedToNewsletter: false
 });
@@ -49,13 +59,13 @@ This method allows you to identify the current visitor, and (optionally) describ
 _Track a simple event, with no event properties:_
 
 ```
-ElectricLove.track('click_signup_button');
+Analytics.track('click_signup_button');
 ```
 
 _Track a more complex event, with event properties:_
 
 ```
-ElectricLove.track('purchase', {
+Analytics.track('purchase', {
     amount: 32.00,
     itemCount: 4,
     shippingSpeed: 'next-day'

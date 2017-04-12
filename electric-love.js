@@ -1,4 +1,4 @@
-(function () {
+var ElectricLove = (function ElectricLove () {
     /**
      * Third-party adapters for Gumshoe.track()
      */
@@ -178,5 +178,9 @@
     ElectricLove.thirdPartyAdapters = thirdPartyAdapters;
     ElectricLove.identify = identify;
     ElectricLove.track = track;
+
+    return function () {
+        return ElectricLove;
+    };
 
 })();
