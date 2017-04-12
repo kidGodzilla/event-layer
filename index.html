@@ -3,6 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Electric-love.js Demo</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css"/>
+
+    <style>
+        body {
+            padding: 50px;
+        }
+        .anchor {
+            display: none;
+        }
+        .indent {
+            margin-left: 75px;
+        }
+        pre {
+            background-color: #e9e9e9;
+            padding: 10px 20px;
+            font-family: monospace;
+        }
+        h2 {
+            margin-top: 50px;
+            margin-bottom: 15px;
+        }
+        p {
+            line-height: 1.5;
+        }
+    </style>
+
 </head>
 <body>
 
@@ -61,18 +88,20 @@
     onTrack: function (eventName, eventProperties) {}
     }
 </code></pre>
-    <p>It has three main components:</p>
-    <h3><a id="user-content-1-test" class="anchor" href="#1-test" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. Test:</h3>
-    <p>This function, once evaluated, should provide an answer to the question “has a specific third-party analytics library been installed on this page? Is it active? Should we try to send events to this service?”</p>
-    <p>This can be as simple as sniffing the window object for a global variables, and a commonly-used (and not likely to disappear) method or property:</p>
+
+    <div class="indent">
+        <p>It has three main components:</p>
+        <h3><a id="user-content-1-test" class="anchor" href="#1-test" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. Test:</h3>
+        <p>This function, once evaluated, should provide an answer to the question “has a specific third-party analytics library been installed on this page? Is it active? Should we try to send events to this service?”</p>
+        <p>This can be as simple as sniffing the window object for a global variables, and a commonly-used (and not likely to disappear) method or property:</p>
 <pre><code>test: function () {
     return window.ga &amp;&amp; window.ga.loaded;
     }
 </code></pre>
-    <p>(A simple example taken from the Google Analytics adapter)</p>
-    <h3><a id="user-content-2-onidentify" class="anchor" href="#2-onidentify" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. onIdentify:</h3>
-    <p>This function takes data from our generic <code>identify</code> method, and passes it along to a third-party library, via an adapter.</p>
-    <p>This should contain a minimal number of integrity checks and transforms, as well as a lightweight wrapper for the library's identify and/or describe functionality.</p>
+        <p>(A simple example taken from the Google Analytics adapter)</p>
+        <h3><a id="user-content-2-onidentify" class="anchor" href="#2-onidentify" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. onIdentify:</h3>
+        <p>This function takes data from our generic <code>identify</code> method, and passes it along to a third-party library, via an adapter.</p>
+        <p>This should contain a minimal number of integrity checks and transforms, as well as a lightweight wrapper for the library's identify and/or describe functionality.</p>
 <pre><code>onIdentify: function (userId, userProperties) {
     // Send the identify call to Mixpanel's JS library
     if (window.mixpanel &amp;&amp; userId)
@@ -83,17 +112,19 @@
     mixpanel.people.set(userProperties);
     }
 </code></pre>
-    <p>(A simple example taken from the Mixpanel adapter)</p>
-    <h3><a id="user-content-3-ontrack" class="anchor" href="#3-ontrack" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. onTrack:</h3>
-    <p>This function takes data from our generic <code>track</code> method, and passes it along to a third-party library, via an adapter.</p>
-    <p>This should contain a minimal number of integrity checks and transforms, as well as a lightweight wrapper for the library's event tracking functionality.</p>
+        <p>(A simple example taken from the Mixpanel adapter)</p>
+        <h3><a id="user-content-3-ontrack" class="anchor" href="#3-ontrack" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. onTrack:</h3>
+        <p>This function takes data from our generic <code>track</code> method, and passes it along to a third-party library, via an adapter.</p>
+        <p>This should contain a minimal number of integrity checks and transforms, as well as a lightweight wrapper for the library's event tracking functionality.</p>
 <pre><code>onTrack: function (eventName, eventProperties) {
     // Send the tracked event to Heap's JS library
     if (window.heap &amp;&amp; eventName)
     heap.track(eventName, eventProperties);
     }
 </code></pre>
-    <p>(A simple example taken from the Heap Analytics adapter)</p>
+        <p>(A simple example taken from the Heap Analytics adapter)</p>
+    </div>
+
     <h2><a id="user-content-pull-requests" class="anchor" href="#pull-requests" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Pull Requests</h2>
     <p><strong>Yes, Please &amp; Thank you!</strong></p>
     <p>To keep things organized, please open an issue for discussion before putting too much work into a pull request. I would feel really bad if you put a lot of work into something, only for it to not make sense to include it or merge the Pull Request.</p>
@@ -110,11 +141,13 @@
     <h2><a id="user-content-thanks" class="anchor" href="#thanks" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Thanks!</h2>
 </article>
 
-<hr/>
+<hr style="margin-top: 100px" />
 
-<h2>Demo:</h2>
+<h2 style="margin-bottom: 15px">Demo:</h2>
 
-<button onclick="Analytics.track('button_clicked')">Click me</button>
+<button onclick="Analytics.track('button_clicked');alert('Event `button_clicked` tracked (you can inspect it in the network tab of your console)');">Click me</button>
+
+<p style="margin-bottom: 200px;">&nbsp;</p>
 
 <script src="electric-love.js"></script>
 
