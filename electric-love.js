@@ -105,7 +105,7 @@ var ElectricLove = (function ElectricLove () {
                 return window.ga && window.ga.loaded;
             },
             onIdentify: function (userId, userProperties) {
-                // Do nothing, because, google analytics :(
+                if (window.ga) ga('set', 'userId', userId);
             },
             onTrack: function (eventName, eventProperties) {
                 if (window.ga) ga('send', {
