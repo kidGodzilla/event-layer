@@ -177,7 +177,7 @@ var ElectricLove = (function ElectricLove () {
                     HS.beacon.identify(userProperties);
             }
         },
-        'fullstory': { // Do not modify this template
+        'fullstory': {
             enabled: true,
             test: function () {
                 return window.FS && window._fs_loaded;
@@ -186,7 +186,7 @@ var ElectricLove = (function ElectricLove () {
                 if (window.FS && userId) FS.identify(userId, userProperties);
             }
         },
-        'olark': { // Do not modify this template
+        'olark': {
             enabled: true,
             test: function () {
                 return window.olark;
@@ -201,7 +201,7 @@ var ElectricLove = (function ElectricLove () {
                 }
             }
         },
-        'calq': { // Do not modify this template
+        'calq': {
             enabled: true,
             test: function () {
                 return window.calq;
@@ -249,7 +249,7 @@ var ElectricLove = (function ElectricLove () {
                 if (window.calq) calq.action.trackPageView();
             }
         },
-        'chameleon': { // Do not modify this template
+        'chameleon': {
             enabled: true,
             test: function () {
                 return window.chmln;
@@ -291,7 +291,7 @@ var ElectricLove = (function ElectricLove () {
                 window.chmln.set(options);
             }
         },
-        'sentry': { // Do not modify this template
+        'sentry': {
             enabled: true,
             test: function () {
                 return window.Raven;
@@ -304,7 +304,7 @@ var ElectricLove = (function ElectricLove () {
                     Raven.setUserContext(userProperties);
             }
         },
-        'luckyorange': { // Do not modify this template
+        'luckyorange': {
             enabled: true,
             test: function () {
                 return !!window.__lo_cs_added;
@@ -317,7 +317,7 @@ var ElectricLove = (function ElectricLove () {
                     window.__wtw_custom_user_data = userProperties;
             }
         },
-        'castle': { // Do not modify this template
+        'castle': {
             enabled: true,
             test: function () {
                 return typeof window._castle === 'function';
@@ -331,6 +331,19 @@ var ElectricLove = (function ElectricLove () {
             },
             page: function (category, name, properties) {
                 if (window._castle) _castle('page', properties.url, properties.title);
+            }
+        },
+        'rollbar': {
+            enabled: false,
+            test: function () {
+                return window.Rollbar;
+            },
+            identify: function (userId, userProperties) {
+                if (!userProperties) userProperties = {};
+                userProperties.id = userId;
+
+                if (window.Rollbar && userId)
+                    Rollbar.configure({ payload: { person: userProperties } });
             }
         },
         'blank-adapter-template': { // Do not modify this template
