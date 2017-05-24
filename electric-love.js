@@ -164,6 +164,30 @@ var ElectricLove = (function ElectricLove () {
                     HS.beacon.identify(userProperties);
             }
         },
+        'fullstory': { // Do not modify this template
+            enabled: true,
+            test: function () {
+                return window.FS && window._fs_loaded;
+            },
+            identify: function (userId, userProperties) {
+                if (window.FS && userId) FS.identify(userId, userProperties);
+            }
+        },
+        'olark': { // Do not modify this template
+            enabled: true,
+            test: function () {
+                return window.olark;
+            },
+            identify: function (userId, userProperties) {
+                if (window.olark && userId) olark.identify(userId);
+
+                if (userProperties.email) {
+                    olark('api.visitor.updateEmailAddress', {
+                        emailAddress: userProperties.email
+                    });
+                }
+            }
+        },
         'blank-adapter-template': { // Do not modify this template
             enabled: false,
             test: function () {},
