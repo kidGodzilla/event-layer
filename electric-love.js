@@ -324,7 +324,13 @@ var ElectricLove = (function ElectricLove () {
             },
             identify: function (userId, userProperties) {
                 delete userProperties.id;
-                _castle('identify', userId, userProperties);
+                if (window._castle) _castle('identify', userId, userProperties);
+            },
+            track: function (eventName, eventProperties) {
+                if (window._castle) _castle('track', eventName, eventProperties);
+            },
+            page: function (category, name, properties) {
+                if (window._castle) _castle('page', properties.url, properties.title);
             }
         },
         'blank-adapter-template': { // Do not modify this template
