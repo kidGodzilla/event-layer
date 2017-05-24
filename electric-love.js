@@ -369,13 +369,13 @@ var ElectricLove = (function ElectricLove () {
             },
             track: function (eventName, eventProperties) {
                 if (!eventProperties) eventProperties = {};
-                eventProperties.eventName = eventName;
+                eventProperties.event = eventName;
 
                 if (window.dataLayer && eventProperties) dataLayer.push(eventProperties);
             },
             page: function (category, name, properties) {
                 if (!properties) properties = {};
-                properties.eventName = 'pageview_' + name;
+                properties.event = 'pageview_' + name;
                 properties.category = category;
 
                 if (window.dataLayer)
