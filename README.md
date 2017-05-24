@@ -3,7 +3,7 @@ A very very simple abstraction layer for analytics code. Write your events once,
 
 ## Stats
 
-**Number of integrations:** 16
+**Number of integrations:** 17
 
 **Number of tested integrations fully tested / considered stable & production-ready:** 7
 

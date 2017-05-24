@@ -362,6 +362,26 @@ var ElectricLove = (function ElectricLove () {
                 if (window.talkus && appId) talkus('init', appId, userProperties);
             }
         },
+        'google-tag-manager': {
+            enabled: true,
+            test: function () {
+                return !!(window.dataLayer && Array.prototype.push !== window.dataLayer.push);
+            },
+            track: function (eventName, eventProperties) {
+                if (!eventProperties) eventProperties = {};
+                eventProperties.eventName = eventName;
+
+                if (window.dataLayer && eventProperties) dataLayer.push(eventProperties);
+            },
+            page: function (category, name, properties) {
+                if (!properties) properties = {};
+                properties.eventName = 'pageview_' + name;
+                properties.category = category;
+
+                if (window.dataLayer)
+                    dataLayer.push(properties);
+            }
+        },
         'blank-adapter-template': { // Do not modify this template
             enabled: false,
             test: function () {},
