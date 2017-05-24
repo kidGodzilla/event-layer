@@ -305,7 +305,7 @@ var ElectricLove = (function ElectricLove () {
             }
         },
         'luckyorange': { // Do not modify this template
-            enabled: false,
+            enabled: true,
             test: function () {
                 return !!window.__lo_cs_added;
             },
@@ -315,6 +315,16 @@ var ElectricLove = (function ElectricLove () {
 
                 if (window.__lo_cs_added)
                     window.__wtw_custom_user_data = userProperties;
+            }
+        },
+        'castle': { // Do not modify this template
+            enabled: true,
+            test: function () {
+                return typeof window._castle === 'function';
+            },
+            identify: function (userId, userProperties) {
+                delete userProperties.id;
+                _castle('identify', userId, userProperties);
             }
         },
         'blank-adapter-template': { // Do not modify this template
