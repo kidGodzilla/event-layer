@@ -346,6 +346,22 @@ var ElectricLove = (function ElectricLove () {
                     Rollbar.configure({ payload: { person: userProperties } });
             }
         },
+        'talkus': {
+            enabled: true,
+            test: function () {
+                return !!window.talkus;
+            },
+            identify: function (userId, userProperties) {
+                // Hacky way of getting the AppId (for now Todo update)
+                var lsObj = JSON.parse(localStorage.getItem('talkusBubbleTS'));
+                var appId = Object.keys(lsObj)[0];
+
+                if (!userProperties) userProperties = {};
+                userProperties.userId = userId;
+
+                if (window.talkus && appId) talkus('init', appId, userProperties);
+            }
+        },
         'blank-adapter-template': { // Do not modify this template
             enabled: false,
             test: function () {},
