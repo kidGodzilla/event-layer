@@ -148,6 +148,22 @@ var ElectricLove = (function ElectricLove () {
                 if (window.client && eventName) client.recordEvent(eventName, eventProperties);
             }
         },
+        'helpscout': { // Helpscout.net
+            enabled: true,
+            test: function () {
+                return window.HS && window.HSCW;
+            },
+            identify: function (userId, userProperties) {
+
+                if (userId) {
+                    if (!userProperties) userProperties = {};
+                    userProperties.userId = userId;
+                }
+
+                if (window.HS && userProperties)
+                    HS.beacon.identify(userProperties);
+            }
+        },
         'blank-adapter-template': { // Do not modify this template
             enabled: false,
             test: function () {},
