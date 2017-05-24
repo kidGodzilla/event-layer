@@ -236,6 +236,74 @@ var ElectricLove = (function ElectricLove () {
                 if (window.calq) calq.action.trackPageView();
             }
         },
+        'chameleon': { // Do not modify this template
+            enabled: true,
+            test: function () {
+                return window.chmln;
+            },
+            track: function (eventName, eventProperties) {
+                if (window.chmln && eventName) chmln.track(eventName, eventProperties);
+            },
+            identify: function (userId, userProperties) {
+                if (window.chmln && userId) {
+                    var obj = { uid: userId };
+
+                    if (userProperties.email) obj.email = userProperties.email;
+                    if (userProperties.created) obj.created = userProperties.created;
+                    if (userProperties.createdAt) obj.created = userProperties.createdAt;
+
+                    if (userProperties.city) obj.city = userProperties.city;
+                    if (userProperties.state) obj.state = userProperties.state;
+                    if (userProperties.country) obj.country = userProperties.country;
+
+                    // platform, device, screen, browser, IP address, locale, timezone, language
+
+                    chmln.identify(obj);
+                }
+            },
+            alias: function (userId, previousId) {
+                if (window.chmln && userId && previousId) chmln.alias({ from: previousId, to: userId });
+            },
+            group: function (groupId, traits) {
+                if (!groupId) return;
+                var options = {};
+
+                if (traits)  {
+                    for (var key in traits) {
+                        options['group:' + key] = traits[key];
+                    }
+                }
+
+                options['group:id'] = groupId;
+                window.chmln.set(options);
+            }
+        },
+        'sentry': { // Do not modify this template
+            enabled: true,
+            test: function () {
+                return window.Raven;
+            },
+            identify: function (userId, userProperties) {
+                if (!userProperties) userProperties = {};
+                if (userId) userProperties.userId = userId;
+
+                if (window.Raven)
+                    Raven.setUserContext(userProperties);
+            }
+        },
+        'luckyorange': { // Do not modify this template
+            enabled: false,
+            test: function () {
+                return !!window.__lo_cs_added;
+            },
+            identify: function (userId, userProperties) {
+                if (!userProperties) userProperties = {};
+                if (userId) userProperties.userId = userId;
+
+                if (window.__lo_cs_added)
+                    window.__wtw_custom_user_data = userProperties;
+            }
+        },
         'blank-adapter-template': { // Do not modify this template
             enabled: false,
             test: function () {},

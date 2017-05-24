@@ -1,6 +1,17 @@
 # Electric Love
 A very very simple abstraction layer for analytics code. Write your events once, then send them where ever you want.
 
+## Stats
+
+**Number of integrations:** 14
+
+**Number of tested integrations fully tested / considered stable & production-ready:** 7
+
+__Would you like to request an integration?__ Our current turn-around time is 72 hours. <a href="mailto:james@gumshoe.io">Email me</a> for more details. 
+
+If the docs are publicly available or it's supported by Analytics.js, I can turn around an implementation in 72 hours. 
+All I ask is that you make yourself available for testing / verification.
+
 ## What is it?
 
 **“Electric Love”** is an extensible abstraction layer for working with common third-party Analytics libraries.
