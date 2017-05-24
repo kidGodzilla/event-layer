@@ -334,7 +334,7 @@ var ElectricLove = (function ElectricLove () {
             }
         },
         'rollbar': {
-            enabled: false,
+            enabled: true,
             test: function () {
                 return window.Rollbar;
             },
