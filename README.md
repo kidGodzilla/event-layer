@@ -7,10 +7,10 @@ A very very simple abstraction layer for analytics code. Write your events once,
 
 **Number of tested integrations fully tested / considered stable & production-ready:** 7
 
-__Would you like to request an integration?__ Our current turn-around time is 72 hours. <a href="mailto:james@gumshoe.io">Email me</a> for more details. 
+__Would you like to request an integration?__ Our current turn-around time is 72 hours (Add another week for testing). <a href="mailto:james@gumshoe.io">Email me</a> for more details. 
 
 If the docs are publicly available or it's supported by Analytics.js, I can turn around an implementation in 72 hours. 
-All I ask is that you make yourself available for testing / verification.
+All I ask is that you make yourself available for testing / verification (this usually takes about a week).
 
 ## What is it?
 
@@ -170,12 +170,16 @@ Something you feel is missing? Open an issue (Although we may not be able to get
 
 [ ] **NPM Package**
 
-[ ] Publish to **cdn.js**
+[ ] Publish to **CDN**
 
 
 ## Why is it called ‘Electric Love’?
 
 No reason. Naming things is hard. Also https://youtu.be/RjmU-fou_6A is a pretty cool song (From the Bob's Burgers soundtrack).
 
+
+## That's stupid. Will you consider renaming it?
+
+Probably.
 
 ## Thanks!
