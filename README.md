@@ -26,11 +26,11 @@ Once installed, you'll need to include `electric-love.js` in your project, and t
 
 Include one of the following scripts in your project:
 
-`https://unpkg.com/electric-love@0.2.1/electric-love.js`
+`https://unpkg.com/electric-love@latest/electric-love.js`
 
 or alternatively:
 
-`https://cdn.jsdelivr.net/npm/electric-love@0.2.1/electric-love.js`
+`https://cdn.jsdelivr.net/npm/electric-love@latest/electric-love.js`
 
 Then follow the instructions below.
 
