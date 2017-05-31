@@ -3,6 +3,15 @@ A very very simple abstraction layer for analytics code. Write your events once,
 
 Demo: https://kidgodzilla.github.io/electric-love/
 
+## Installation via NPM
+
+```
+npm install electric-love
+```
+
+Once installed, you'll need to include `electric-love.js` in your project, and then (optionally) instantiate a new object (aliasing it to a new global, if you prefer). Continue reading to see how that might work.
+
+
 ## Stats
 
 **Number of integrations:** 17
@@ -170,9 +179,7 @@ Something you feel is missing? Open an issue (Although we may not be able to get
 
 ## Todos
 
-[ ] **NPM Package**
-
-[ ] Publish to **CDN**
+[ ] Publish to a **CDN**
 
 
 ## Why is it called ‘Electric Love’?
