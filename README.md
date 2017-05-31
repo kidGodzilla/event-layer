@@ -1,6 +1,8 @@
 # Electric Love
 A very very simple abstraction layer for analytics code. Write your events once, then send them where ever you want.
 
+Demo: https://kidgodzilla.github.io/electric-love/
+
 ## Stats
 
 **Number of integrations:** 17
@@ -94,8 +96,8 @@ Below is an example of a blank adapter.
 'blank-adapter-template': { // Do not modify this template
     enabled: false, // Change to true once you're completed testing
     test: function () {},
-    onIdentify: function (userId, userProperties) {},
-    onTrack: function (eventName, eventProperties) {}
+    identify: function (userId, userProperties) {},
+    track: function (eventName, eventProperties) {}
 }
 ```
 
@@ -114,13 +116,13 @@ test: function () {
 
 (A simple example taken from the Google Analytics adapter)
 
-### 2. onIdentify:
+### 2. identify:
 This function takes data from our generic `identify` method, and passes it along to a third-party library, via an adapter.
 
 This should contain a minimal number of integrity checks and transforms, as well as a lightweight wrapper for the library's identify and/or describe functionality.
 
 ```
-onIdentify: function (userId, userProperties) {
+identify: function (userId, userProperties) {
     // Send the identify call to Mixpanel's JS library
     if (window.mixpanel && userId) 
         mixpanel.identify(userId);
@@ -133,13 +135,13 @@ onIdentify: function (userId, userProperties) {
 
 (A simple example taken from the Mixpanel adapter)
 
-### 3. onTrack:
+### 3. track:
 This function takes data from our generic `track` method, and passes it along to a third-party library, via an adapter.
 
 This should contain a minimal number of integrity checks and transforms, as well as a lightweight wrapper for the library's event tracking functionality.
 
 ```
-onTrack: function (eventName, eventProperties) {
+track: function (eventName, eventProperties) {
     // Send the tracked event to Heap's JS library
     if (window.heap && eventName) 
     heap.track(eventName, eventProperties);

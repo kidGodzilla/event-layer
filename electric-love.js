@@ -3,17 +3,17 @@ var ElectricLove = (function ElectricLove () {
      * Third-party adapters for ElectricLove.track(), ElectricLove.identify(), etc.
      */
     var thirdPartyAdapters = {
-        // Todo: We should handle the case where the user aliases ElectricLove -> window.analytics
         'segment': {
             enabled: true,
             test: function () {
-                return window.analytics && window.analytics.Integrations && typeof(window.analytics.Integrations) === 'object';
+                // This test not only tests for Segment's variety of Analytics.js,
+                // it distinguishes it from this library, so you can simply alias this to window.analytics without worry.
+                return window.analytics && typeof(window.analytics) === 'object' && window.analytics.Integrations && typeof(window.analytics.Integrations) === 'object';
             },
             identify: function (userId, userProperties) {
                 // Send the identify call to Segment's Analytics.js library
                 // console.log('Identifying: ', userId, userProperties);
                 if (window.analytics && userId) analytics.identify(userId, userProperties);
-
             },
             track: function (eventName, eventProperties) {
                 // Send the tracked event to Segment's Analytics.js library
@@ -41,13 +41,20 @@ var ElectricLove = (function ElectricLove () {
             test: function () {
                 return window.mixpanel && window.mixpanel.__loaded;
             },
-            identify: function (userId, userProperties) {
+            identify: function (userId, userProperties, options) {
                 // Send the identify call to Mixpanel's JS library
                 // console.log('Identifying: ', userId, userProperties);
                 if (window.mixpanel && userId) mixpanel.identify(userId);
 
-                // Set people properties on our identified user
-                if (window.mixpanel && userProperties) mixpanel.people.set(userProperties);
+                if (window.mixpanel && userProperties) {
+                    if (options && options.setOnce) {
+                        // Set people properties on our identified user, but only if they have not yet been set.
+                        mixpanel.people.set_once(userProperties);
+                    } else {
+                        // Set people properties on our identified user
+                        mixpanel.people.set(userProperties);
+                    }
+                }
             },
             track: function (eventName, eventProperties) {
                 // Send the tracked event to Mixpanel's JS library
@@ -146,7 +153,8 @@ var ElectricLove = (function ElectricLove () {
         },
         'keen': {
             enabled: true,
-            // Todo: This test sucks (keen is not opinionated as to what global you place it in, but defaults to client, which is too common to use as a test.)
+            // Todo: This test sucks (keen is not opinionated as to what global you place it in (you don't even need to expose it as a global),
+            // but defaults to client, which is too common to use as a test.)
             test: function () {
                 return window.Keen && window.Keen.loaded && window.client;
             },
@@ -543,6 +551,7 @@ var ElectricLove = (function ElectricLove () {
     window.ElectricLove = {};
     ElectricLove.thirdPartyAdapters = thirdPartyAdapters;
     ElectricLove.readyFunction = null;
+    ElectricLove.Integrations = null; // This needs to be null so that it's not confused with Segment.com's library.
     ElectricLove.identify = identify;
     ElectricLove.onReady = onReady;
     ElectricLove.track = track;

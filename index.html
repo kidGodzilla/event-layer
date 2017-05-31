@@ -87,8 +87,8 @@
 <pre><code>'blank-adapter-template': { // Do not modify this template
     enabled: false, // Change to true once you're completed testing
     test: function () {},
-    onIdentify: function (userId, userProperties) {},
-    onTrack: function (eventName, eventProperties) {}
+    identify: function (userId, userProperties) {},
+    track: function (eventName, eventProperties) {}
 }
 </code></pre>
 
@@ -102,10 +102,10 @@
 }
 </code></pre>
         <p>(A simple example taken from the Google Analytics adapter)</p>
-        <h3><a id="user-content-2-onidentify" class="anchor" href="#2-onidentify" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. onIdentify:</h3>
+        <h3><a id="user-content-2-identify" class="anchor" href="#2-identify" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. identify:</h3>
         <p>This function takes data from our generic <code>identify</code> method, and passes it along to a third-party library, via an adapter.</p>
         <p>This should contain a minimal number of integrity checks and transforms, as well as a lightweight wrapper for the library's identify and/or describe functionality.</p>
-<pre><code>onIdentify: function (userId, userProperties) {
+<pre><code>identify: function (userId, userProperties) {
     // Send the identify call to Mixpanel's JS library
     if (window.mixpanel &amp;&amp; userId)
     mixpanel.identify(userId);
@@ -116,10 +116,10 @@
 }
 </code></pre>
         <p>(A simple example taken from the Mixpanel adapter)</p>
-        <h3><a id="user-content-3-ontrack" class="anchor" href="#3-ontrack" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. onTrack:</h3>
+        <h3><a id="user-content-3-track" class="anchor" href="#3-track" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. track:</h3>
         <p>This function takes data from our generic <code>track</code> method, and passes it along to a third-party library, via an adapter.</p>
         <p>This should contain a minimal number of integrity checks and transforms, as well as a lightweight wrapper for the library's event tracking functionality.</p>
-<pre><code>onTrack: function (eventName, eventProperties) {
+<pre><code>track: function (eventName, eventProperties) {
     // Send the tracked event to Heap's JS library
     if (window.heap &amp;&amp; eventName)
     heap.track(eventName, eventProperties);
