@@ -3,15 +3,6 @@ A very very simple abstraction layer for analytics code. Write your events once,
 
 Demo: https://kidgodzilla.github.io/electric-love/
 
-## Installation via NPM
-
-```
-npm install electric-love
-```
-
-Once installed, you'll need to include `electric-love.js` in your project, and then (optionally) instantiate a new object (aliasing it to a new global, if you prefer). Continue reading to see how that might work.
-
-
 ## Stats
 
 **Number of integrations:** 17
@@ -22,6 +13,14 @@ __Would you like to request an integration?__ Our current turn-around time is 72
 
 If the docs are publicly available or it's supported by Analytics.js, I can turn around an implementation in 72 hours. 
 All I ask is that you make yourself available for testing / verification (this usually takes about a week).
+
+## Installation via NPM
+
+```
+npm install electric-love
+```
+
+Once installed, you'll need to include `electric-love.js` in your project, and then (optionally) instantiate a new object (aliasing it to a new global, if you prefer). Continue reading to see how that might work.
 
 ## What is it?
 
