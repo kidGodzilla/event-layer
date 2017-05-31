@@ -260,7 +260,7 @@ var ElectricLove = (function ElectricLove () {
         'chameleon': {
             enabled: true,
             test: function () {
-                return window.chmln;
+                return !!window.chmln;
             },
             track: function (eventName, eventProperties) {
                 if (window.chmln && eventName) chmln.track(eventName, eventProperties);
@@ -447,7 +447,7 @@ var ElectricLove = (function ElectricLove () {
                 return window._dc && typeof(window._dc) === 'object';
             },
             track: function (eventName, eventProperties) {
-                if (!window.track || !eventName) return;
+                if (!window._dcq || !eventName) return;
 
                 if (eventProperties) {
                     // Convert all keys with spaces to underscores
@@ -466,11 +466,93 @@ var ElectricLove = (function ElectricLove () {
                     }
                 }
 
-                window.track(eventName, eventProperties);
+                window._dcq.push('track', eventName, eventProperties);
             },
             identify: function (userId, userProperties) {
-                if (window.identify && userProperties)
-                    window.identify(userProperties);
+                if (window._dcq && userProperties)
+                    window._dcq.push('identify', userProperties);
+            }
+        },
+        'bugsnag': {
+            enabled: true,
+            test: function () {
+                return window.Bugsnag && typeof(window.Bugsnag) === 'object';
+            },
+            identify: function (userId, userProperties) {
+                if (!window.Bugsnag) return;
+                window.Bugsnag.user = window.Bugsnag.user || {};
+                window.Bugsnag.user = Object.assign(window.Bugsnag.user, userProperties);
+            }
+        },
+        'improvely': {
+            enabled: true,
+            test: function () {
+                return !!(window.improvely && window.improvely.identify);
+            },
+            track: function (eventName, eventProperties) {
+                var props = eventProperties;
+
+                // Todo: What does track.properties({ revenue: 'amount' }) do?
+                // Does it do this?
+                // props = Object.assign(props, { revenue: 'amount' });
+                // or this?
+                // props.revenue = props.amount;
+                props.revenue = props.amount;
+                delete props.amount;
+
+                props.type = eventName;
+                window.improvely.goal(props);
+            },
+            identify: function (userId, userProperties) {
+                if (userId && window.improvely)
+                    window.improvely.label(userId);
+            }
+        },
+        'inspectlet': {
+            enabled: true,
+            test: function () {
+                return !!(window.__insp_ && window.__insp);
+            },
+            track: function (eventName, eventProperties) {
+                if (window.__insp && eventName)
+                    __insp.push('tagSession', eventName, eventProperties);
+            },
+            identify: function (userId, userProperties) {
+                if (!window.__insp) return;
+
+                //var traits = identify.traits({ id: 'userid' });
+                // Todo: Am I doing it right?
+                var traits = Object.assign({}, userProperties);
+                traits.id = userId || traits.uid;
+                delete traits.uid;
+
+                if (userProperties && userProperties.email)
+                    __insp.push('identify', userProperties.email);
+
+                if (userId || userProperties)
+                    __insp.push('tagSession', traits);
+            },
+            page: function (category, name, properties) {
+                if (window.__insp)
+                    __insp.push('virtualPage');
+            }
+        },
+        'qualaroo': {
+            enabled: true,
+            test: function () {
+                return !!(window._kiq && window._kiq.push !== Array.prototype.push);
+            },
+            track: function (eventName, eventProperties, options) {
+                var traits = {};
+                traits['Triggered: ' + eventName] = true;
+                // this.identify(new Identify({ traits: traits })); // Identify = require('segmentio-facade').Identify;
+            },
+            identify: function (userId, userProperties) {
+                if (!window._kiq) return;
+
+                if (userProperties && userProperties.email) userId = userProperties.email;
+                if (userProperties) _kiq.push('set', userProperties);
+                if (userId) _kiq.push('identify', userId);
             }
         },
         'blank-adapter-template': { // Do not modify this template

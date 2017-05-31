@@ -5,7 +5,7 @@ Demo: https://kidgodzilla.github.io/electric-love/
 
 ## Stats
 
-**Number of integrations:** 19
+**Number of integrations:** 25
 
 **Number of tested integrations fully tested / considered stable & production-ready:** 7
 
