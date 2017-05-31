@@ -441,6 +441,38 @@ var ElectricLove = (function ElectricLove () {
                     window.drift.page(name);
             }
         },
+        'drip': {
+            enabled: true,
+            test: function () {
+                return window._dc && typeof(window._dc) === 'object';
+            },
+            track: function (eventName, eventProperties) {
+                if (!window.track || !eventName) return;
+
+                if (eventProperties) {
+                    // Convert all keys with spaces to underscores
+                    for (var key in eventProperties) {
+                        if (key.indexOf(' ') === -1) return; // Skip keys w/o spaces
+
+                        var formattedKey = key.replace(' ', '_');
+                        eventProperties[formattedKey] = eventProperties[key];
+                        delete eventProperties[key];
+                    }
+
+                    if (eventProperties.revenue) {
+                        var cents = Math.round(eventProperties.revenue * 100);
+                        eventProperties.cents = cents;
+                        delete eventProperties.revenue;
+                    }
+                }
+
+                window.track(eventName, eventProperties);
+            },
+            identify: function (userId, userProperties) {
+                if (window.identify && userProperties)
+                    window.identify(userProperties);
+            }
+        },
         'blank-adapter-template': { // Do not modify this template
             enabled: false,
             test: function () {},
@@ -458,11 +490,11 @@ var ElectricLove = (function ElectricLove () {
 
         var obj = Object.assign({}, oObj);
 
-        obj.forEach(function (val, key) {
-            if (type(val) === 'date') obj[key] = convert(val);
-
-            if (type(val) === 'object') obj[key] = convertDates(val, convert);
-        });
+        for (var key in obj) {
+            var val = obj[key];
+            if (typeof(val) === 'date') obj[key] = convert(val);
+            if (typeof(val) === 'object') obj[key] = convertDates(val, convert);
+        }
 
         return obj;
     }
