@@ -390,6 +390,57 @@ var ElectricLove = (function ElectricLove () {
                     dataLayer.push(properties);
             }
         },
+        'elevio': {
+            enabled: true,
+            test: function () {
+                return !!window._elev;
+            },
+            identify: function (userId, userProperties) {
+                if (!userProperties || !window._elev) return;
+
+                var user = {};
+                user.via = 'electric-love';
+
+                if (userProperties.email) user.email = userProperties.email;
+                if (userProperties.name) user.name = userProperties.name;
+                if (userProperties.plan) user.plan = [userProperties.plan];
+                if (userProperties.plan) user.groups = [userProperties.plan];
+
+                // Delete those
+                delete userProperties.firstName;
+                delete userProperties.lastName;
+                delete userProperties.email;
+                delete userProperties.name;
+                delete userProperties.plan;
+                delete userProperties.id;
+
+                if (Object.keys(userProperties).length > 0) user.traits = userProperties;
+                window._elev.user = user;
+            }
+        },
+        'drift': {
+            enabled: true,
+            test: function () {
+                return window.drift !== undefined;
+            },
+            track: function (eventName, eventProperties) {
+                // Todo: Nice to have, Investigate convertDates for eventProperties.
+                // This seems to iterate through dates and apply `Math.floor(date.getTime() / 1000)`
+
+                if (window.drift && eventName)
+                    window.drift.track(eventName, eventProperties);
+            },
+            identify: function (userId, userProperties) {
+                if (!window.drift || !userId) return;
+
+                delete userProperties.id;
+                window.drift.identify(userId, userProperties);
+            },
+            page: function (category, name, properties) {
+                if (window.drift && name)
+                    window.drift.page(name);
+            }
+        },
         'blank-adapter-template': { // Do not modify this template
             enabled: false,
             test: function () {},
@@ -400,6 +451,21 @@ var ElectricLove = (function ElectricLove () {
             group: function (groupId, traits) {}
         }
     };
+
+    // Recursively convert an `obj`'s dates to new values, using an input function, convert().
+    function convertDates (oObj, convert) {
+        if (typeof(oObj) !== 'object') return oObj;
+
+        var obj = Object.assign({}, oObj);
+
+        obj.forEach(function (val, key) {
+            if (type(val) === 'date') obj[key] = convert(val);
+
+            if (type(val) === 'object') obj[key] = convertDates(val, convert);
+        });
+
+        return obj;
+    }
 
     function track (eventName, eventProperties, options, callback) {
         if (!thirdPartyAdapters) return; // Early return if there are no adapters
