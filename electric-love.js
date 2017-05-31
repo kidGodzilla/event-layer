@@ -1,4 +1,5 @@
 var ElectricLove = (function ElectricLove () {
+
     /**
      * Third-party adapters for ElectricLove.track(), ElectricLove.identify(), etc.
      */
@@ -724,8 +725,7 @@ var ElectricLove = (function ElectricLove () {
 
     // Todo:
     // QueryString API?
-    // Selecting Integrations should match analytics.js syntax?
-
+    // Selecting Integrations should match analytics.js syntax
 
     // Create / export globals
     window.ElectricLove = {};
