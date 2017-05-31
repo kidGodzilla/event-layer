@@ -22,6 +22,14 @@ npm install electric-love
 
 Once installed, you'll need to include `electric-love.js` in your project, and then (optionally) instantiate a new object (aliasing it to a new global, if you prefer). Continue reading to see how that might work.
 
+## Installation via CDN
+
+Include the following script in your project:
+
+`https://unpkg.com/electric-love@0.2.1/electric-love.js`
+
+Then follow the instructions below.
+
 ## What is it?
 
 **“Electric Love”** is an extensible abstraction layer for working with common third-party Analytics libraries.
