@@ -54,60 +54,26 @@
 
     <a href="#demo">Scroll Down for a Demo</a>
 
-    <h2><a aria-hidden="true" class="anchor" href="#what-is-it" id=
-            "user-content-what-is-it"><svg aria-hidden="true" class="octicon octicon-link" height="16" version=
-            "1.1" viewbox="0 0 16 16" width="16">
-        <path d=
-                      "M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-              fill-rule="evenodd"></path></svg></a>What is it?</h2>
-    <p><strong>“Electric Love”</strong> is an extensible abstraction layer for working with common
-        third-party Analytics libraries.</p>
-    <p>Since more or less all analytics libraries work the same way (allowing you to identify and
-        describe users, and track the events which they perform), <strong>“Electric Love”</strong> creates
-        an abstraction layer and a set of adapters that allow you to write generic Analytics Tracking code
-        once, and update your configuration later to send your data anywhere you need.</p>
-    <h2><a aria-hidden="true" class="anchor" href="#how-does-it-work" id=
-            "user-content-how-does-it-work"><svg aria-hidden="true" class="octicon octicon-link" height="16"
-                                                 version="1.1" viewbox="0 0 16 16" width="16">
-        <path d=
-                      "M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-              fill-rule="evenodd"></path></svg></a>How does it work?</h2>
+    <h2><a id="user-content-what-is-it" class="anchor" href="#what-is-it" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>What is it?</h2>
+    <p><strong>“Electric Love”</strong> is an extensible abstraction layer for working with common third-party Analytics libraries.</p>
+    <p>Since more or less all analytics libraries work the same way (allowing you to identify and describe users, and track the events which they perform),
+        <strong>“Electric Love”</strong> creates an abstraction layer and a set of adapters that allow you to write generic Analytics Tracking code once, and update your
+        configuration later to send your data anywhere you need.</p>
+    <h2><a id="user-content-how-does-it-work" class="anchor" href="#how-does-it-work" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>How does it work?</h2>
     <ol>
-        <li>Install your third-party analytics libraries in your application or website (you don't need to
-            do anything special)</li>
+        <li>Install your third-party analytics libraries in your application or website (you don't need to do anything special)</li>
         <li>Install <code>electric-love.js</code> in your website or app.</li>
-        <li>Instantiate a new instance of <strong>ElectricLove:</strong> (e.g. <code>var Analytics = new
-            ElectricLove();</code>).</li>
-        <li>Instead of filling your app or website with service-specific tracking code, write generic code
-            using the <strong>“Electric Love” Javascript API</strong> (described below).</li>
-        <li><strong>“Electric Love”</strong> will detect the third-party Analytics services you have
-            installed on your website or app, and use it's own, community-maintained adapters to propagate
-            your events, in an identical format, to each third-party service, using the latest version(s) of
-            their APIs.</li>
-        <li><strong>(Optional):</strong> You can extend <strong>“Electric Love”</strong> by writing your
-            own custom adapters for third-party services not yet supported. Each adapter only requires about
-            12 lines of Javascript, and the community is available to help you ship your first PR to
-            <strong>“Electric Love”</strong>.</li>
+        <li>Instantiate a new instance of <strong>ElectricLove:</strong> (e.g. <code>var Analytics = new ElectricLove();</code>).</li>
+        <li>Instead of filling your app or website with service-specific tracking code, write generic code using the <strong>“Electric Love” Javascript API</strong> (described below).</li>
+        <li><strong>“Electric Love”</strong> will detect the third-party Analytics services you have installed on your website or app, and use it's own, community-maintained adapters to propagate your events, in an identical format, to each third-party service, using the latest version(s) of their APIs.</li>
+        <li><strong>(Optional):</strong> You can extend <strong>“Electric Love”</strong> by writing your own custom adapters for third-party services not yet supported. Each adapter only requires about 12 lines of Javascript, and the community is available to help you ship your first PR to <strong>“Electric Love”</strong>.</li>
     </ol>
-    <h2><a aria-hidden="true" class="anchor" href="#instantiating-a-new-instance-of-electriclove" id=
-            "user-content-instantiating-a-new-instance-of-electriclove"><svg aria-hidden="true" class=
-            "octicon octicon-link" height="16" version="1.1" viewbox="0 0 16 16" width="16">
-        <path d=
-                      "M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-              fill-rule="evenodd"></path></svg></a>Instantiating a new instance of ElectricLove</h2>
-    <p>We realize that not everyone wants to litter their code with calls to a global named
-        <strong>“Electric Love”</strong>. So you'll probably want to start off by instantiating a new
-        instance of <strong>“Electric Love”</strong>.</p>
+    <h2><a id="user-content-instantiating-a-new-instance-of-electriclove" class="anchor" href="#instantiating-a-new-instance-of-electriclove" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Instantiating a new instance of ElectricLove</h2>
+    <p>We realize that not everyone wants to litter their code with calls to a global named <strong>“Electric Love”</strong>. So you'll probably want to start off by instantiating a new instance of <strong>“Electric Love”</strong>.</p>
 <pre><code>var Analytics = new ElectricLove();
 </code></pre>
-    <p>You can name it whatever you like, but the examples given below will need to be modified
-        appropriately.</p>
-    <h2><a aria-hidden="true" class="anchor" href="#electricloveidentifyuserid-userproperties" id=
-            "user-content-electricloveidentifyuserid-userproperties"><svg aria-hidden="true" class=
-            "octicon octicon-link" height="16" version="1.1" viewbox="0 0 16 16" width="16">
-        <path d=
-                      "M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-              fill-rule="evenodd"></path></svg></a>ElectricLove.identify(userId, userProperties)</h2>
+    <p>You can name it whatever you like, but the examples given below will need to be modified appropriately.</p>
+    <h2><a id="user-content-electricloveidentifyuserid-userproperties" class="anchor" href="#electricloveidentifyuserid-userproperties" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ElectricLove.identify(userId, userProperties)</h2>
     <p>This method allows you to identify the current visitor, and (optionally) describe the user.</p>
     <p><em>Only identify the user, do not describe any user properties:</em></p>
 <pre><code>Analytics.identify('&lt;unique-user-id&gt;');
@@ -116,16 +82,10 @@
 <pre><code>Analytics.identify('&lt;unique-user-id&gt;', {
     name: 'John Doe',
     subscribedToNewsletter: false
-    });
+});
 </code></pre>
-    <p>This is similar to the <code>Identify</code> method found in Mixpanel, Heap, and
-        Analytics.js.</p>
-    <h2><a aria-hidden="true" class="anchor" href="#electriclovetrackeventname-eventproperties" id=
-            "user-content-electriclovetrackeventname-eventproperties"><svg aria-hidden="true" class=
-            "octicon octicon-link" height="16" version="1.1" viewbox="0 0 16 16" width="16">
-        <path d=
-                      "M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-              fill-rule="evenodd"></path></svg></a>ElectricLove.track(eventName, eventProperties)</h2>
+    <p>This is similar to the <code>Identify</code> method found in Mixpanel, Heap, and Analytics.js.</p>
+    <h2><a id="user-content-electriclovetrackeventname-eventproperties" class="anchor" href="#electriclovetrackeventname-eventproperties" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ElectricLove.track(eventName, eventProperties)</h2>
     <p>This method allows you to identify the current visitor, and (optionally) describe the user.</p>
     <p><em>Track a simple event, with no event properties:</em></p>
 <pre><code>Analytics.track('click_signup_button');
@@ -135,122 +95,76 @@
     amount: 32.00,
     itemCount: 4,
     shippingSpeed: 'next-day'
-    });
+});
 </code></pre>
     <p>This is similar to the <code>Track</code> method found in Mixpanel, Heap, and Analytics.js.</p>
-    <h2><a aria-hidden="true" class="anchor" href="#writing-an-adapter" id=
-            "user-content-writing-an-adapter"><svg aria-hidden="true" class="octicon octicon-link" height="16"
-                                                   version="1.1" viewbox="0 0 16 16" width="16">
-        <path d=
-                      "M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-              fill-rule="evenodd"></path></svg></a>Writing an Adapter</h2>
+    <h2><a id="user-content-writing-an-adapter" class="anchor" href="#writing-an-adapter" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Writing an Adapter</h2>
     <p>Below is an example of a blank adapter.</p>
 <pre><code>'blank-adapter-template': { // Do not modify this template
     enabled: false, // Change to true once you're completed testing
     test: function () {},
     identify: function (userId, userProperties) {},
     track: function (eventName, eventProperties) {}
-    }
+}
 </code></pre>
+
     <div class="indent">
         <p>It has three main components:</p>
-        <h3><a aria-hidden="true" class="anchor" href="#1-test" id="user-content-1-test"><svg aria-hidden=
-                                                                                                      "true" class="octicon octicon-link" height="16" version="1.1" viewbox="0 0 16 16" width="16">
-            <path d=
-                          "M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-                  fill-rule="evenodd"></path></svg></a>1. Test:</h3>
-        <p>This function, once evaluated, should provide an answer to the question “has a specific
-            third-party analytics library been installed on this page? Is it active? Should we try to send
-            events to this service?”</p>
-        <p>This can be as simple as sniffing the window object for a global variables, and a commonly-used
-            (and not likely to disappear) method or property:</p>
-	<pre><code>test: function () {
-        return window.ga &amp;&amp; window.ga.loaded;
-        }
-    </code></pre>
+        <h3><a id="user-content-1-test" class="anchor" href="#1-test" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. Test:</h3>
+        <p>This function, once evaluated, should provide an answer to the question “has a specific third-party analytics library been installed on this page? Is it active? Should we try to send events to this service?”</p>
+        <p>This can be as simple as sniffing the window object for a global variables, and a commonly-used (and not likely to disappear) method or property:</p>
+<pre><code>test: function () {
+    return window.ga &amp;&amp; window.ga.loaded;
+}
+</code></pre>
         <p>(A simple example taken from the Google Analytics adapter)</p>
-        <h3><a aria-hidden="true" class="anchor" href="#2-identify" id=
-                "user-content-2-identify"><svg aria-hidden="true" class="octicon octicon-link" height="16"
-                                               version="1.1" viewbox="0 0 16 16" width="16">
-            <path d=
-                          "M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-                  fill-rule="evenodd"></path></svg></a>2. identify:</h3>
-        <p>This function takes data from our generic <code>identify</code> method, and passes it along to
-            a third-party library, via an adapter.</p>
-        <p>This should contain a minimal number of integrity checks and transforms, as well as a
-            lightweight wrapper for the library's identify and/or describe functionality.</p>
-	<pre><code>identify: function (userId, userProperties) {
-        // Send the identify call to Mixpanel's JS library
-        if (window.mixpanel &amp;&amp; userId)
-        mixpanel.identify(userId);
+        <h3><a id="user-content-2-identify" class="anchor" href="#2-identify" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. identify:</h3>
+        <p>This function takes data from our generic <code>identify</code> method, and passes it along to a third-party library, via an adapter.</p>
+        <p>This should contain a minimal number of integrity checks and transforms, as well as a lightweight wrapper for the library's identify and/or describe functionality.</p>
+<pre><code>identify: function (userId, userProperties) {
+    // Send the identify call to Mixpanel's JS library
+    if (window.mixpanel &amp;&amp; userId)
+    mixpanel.identify(userId);
 
-        // Set people properties on our identified user
-        if (window.mixpanel &amp;&amp; userProperties)
-        mixpanel.people.set(userProperties);
-        }
-    </code></pre>
+    // Set people properties on our identified user
+    if (window.mixpanel &amp;&amp; userProperties)
+    mixpanel.people.set(userProperties);
+}
+</code></pre>
         <p>(A simple example taken from the Mixpanel adapter)</p>
-        <h3><a aria-hidden="true" class="anchor" href="#3-track" id=
-                "user-content-3-track"><svg aria-hidden="true" class="octicon octicon-link" height="16" version=
-                "1.1" viewbox="0 0 16 16" width="16">
-            <path d=
-                          "M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-                  fill-rule="evenodd"></path></svg></a>3. track:</h3>
-        <p>This function takes data from our generic <code>track</code> method, and passes it along to a
-            third-party library, via an adapter.</p>
-        <p>This should contain a minimal number of integrity checks and transforms, as well as a
-            lightweight wrapper for the library's event tracking functionality.</p>
-	<pre><code>track: function (eventName, eventProperties) {
-        // Send the tracked event to Heap's JS library
-        if (window.heap &amp;&amp; eventName)
-        heap.track(eventName, eventProperties);
-        }
-    </code></pre>
+        <h3><a id="user-content-3-track" class="anchor" href="#3-track" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. track:</h3>
+        <p>This function takes data from our generic <code>track</code> method, and passes it along to a third-party library, via an adapter.</p>
+        <p>This should contain a minimal number of integrity checks and transforms, as well as a lightweight wrapper for the library's event tracking functionality.</p>
+<pre><code>track: function (eventName, eventProperties) {
+    // Send the tracked event to Heap's JS library
+    if (window.heap &amp;&amp; eventName)
+    heap.track(eventName, eventProperties);
+}
+</code></pre>
         <p>(A simple example taken from the Heap Analytics adapter)</p>
     </div>
-    <h2><a aria-hidden="true" class="anchor" href="#pull-requests" id=
-            "user-content-pull-requests"><svg aria-hidden="true" class="octicon octicon-link" height="16"
-                                              version="1.1" viewbox="0 0 16 16" width="16">
-        <path d=
-                      "M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-              fill-rule="evenodd"></path></svg></a>Pull Requests</h2>
+
+    <h2><a id="user-content-pull-requests" class="anchor" href="#pull-requests" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Pull Requests</h2>
     <p><strong>Yes, Please &amp; Thank you!</strong></p>
-    <p>To keep things organized, please open an issue for discussion before putting too much work into
-        a pull request. I would feel really bad if you put a lot of work into something, only for it to not
-        make sense to include it or merge the Pull Request.</p>
-    <p>Also, to help keep things organized, try to submit individual pull requests for each issue, and
-        keep the scope of each issue relatively small.</p>
-    <p>For example, if you wanted to add a couple of new adapters, split them into multiple pull
-        requests so we can review them individually.</p>
-    <h2><a aria-hidden="true" class="anchor" href="#issues" id="user-content-issues"><svg aria-hidden=
-                                                                                                  "true" class="octicon octicon-link" height="16" version="1.1" viewbox="0 0 16 16" width="16">
-        <path d=
-                      "M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-              fill-rule="evenodd"></path></svg></a>Issues</h2>
-    <p>Something feel broken? Open an issue! Something you feel is missing? Open an issue (Although we
-        may not be able to get to everything, pull requests are most welcome!)</p>
-    <h2><a aria-hidden="true" class="anchor" href="#why-is-it-called-electric-love" id=
-            "user-content-why-is-it-called-electric-love"><svg aria-hidden="true" class="octicon octicon-link"
-                                                               height="16" version="1.1" viewbox="0 0 16 16" width="16">
-        <path d=
-                      "M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-              fill-rule="evenodd"></path></svg></a>Why is it called ‘Electric Love’?</h2>
-    <p>No reason. Naming things is hard. Also <a href=
-                                                         "https://youtu.be/RjmU-fou_6A">https://youtu.be/RjmU-fou_6A</a> is a pretty cool song (From the
-        Bob's Burgers soundtrack).</p>
-    <h2><a aria-hidden="true" class="anchor" href="#thanks" id="user-content-thanks"><svg aria-hidden=
-                                                                                                  "true" class="octicon octicon-link" height="16" version="1.1" viewbox="0 0 16 16" width="16">
-        <path d=
-                      "M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-              fill-rule="evenodd"></path></svg></a>Thanks!</h2>
-    <hr style="margin-top: 100px">
+    <p>To keep things organized, please open an issue for discussion before putting too much work into a pull request. I would feel really bad if you put a lot of work into something, only for it to not make sense to include it or merge the Pull Request.</p>
+    <p>Also, to help keep things organized, try to submit individual pull requests for each issue, and keep the scope of each issue relatively small.</p>
+    <p>For example, if you wanted to add a couple of new adapters, split them into multiple pull requests so we can review them individually.</p>
+    <h2><a id="user-content-issues" class="anchor" href="#issues" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Issues</h2>
+    <p>Something feel broken? Open an issue!
+        Something you feel is missing? Open an issue (Although we may not be able to get to everything, pull requests are most welcome!)</p>
+
+    <h2><a id="user-content-why-is-it-called-electric-love" class="anchor" href="#why-is-it-called-electric-love" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Why is it called ‘Electric Love’?</h2>
+    <p>No reason. Naming things is hard. Also <a href="https://youtu.be/RjmU-fou_6A">https://youtu.be/RjmU-fou_6A</a> is a pretty cool song (From the Bob's Burgers soundtrack).</p>
+    <h2><a id="user-content-thanks" class="anchor" href="#thanks" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Thanks!</h2>
+
+    <hr style="margin-top: 100px" />
+
     <h2 id="demo" style="margin-bottom: 15px">Demo:</h2>
-    <p>For this demo, we include Google Analytics and the <strong>electric-love.js</strong> library,
-        instantiate electric-love as <strong>`Analytics`</strong>, and track an event called
-        <strong>`button_clicked`</strong> when the button is clicked. You can inspect this page to see how
-        the demo works.</p><button onclick=
-                                           "Analytics.track('button_clicked');alert('Event `button_clicked` tracked (you can inspect it in the network tab of your console)');">Click
-    me</button>
+
+    <p>For this demo, we include Google Analytics and the <strong>electric-love.js</strong> library, instantiate electric-love as <strong>`Analytics`</strong>, and track an event called <strong>`button_clicked`</strong> when the button is clicked. You can inspect this page to see how the demo works.</p>
+
+    <button onclick="Analytics.track('button_clicked');alert('Event `button_clicked` tracked (you can inspect it in the network tab of your console)');">Click me</button>
+
     <p style="margin-bottom: 200px;">&nbsp;</p>
 
 </article>
