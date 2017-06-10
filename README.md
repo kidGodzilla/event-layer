@@ -1,4 +1,7 @@
-# Electric Love
+![Electric Love](https://kidgodzilla.github.io/electric-love/electric-love-logo.png)
+
+-----
+
 A very very simple abstraction layer for analytics code. Write your events once, then send them where ever you want.
 
 Demo: https://kidgodzilla.github.io/electric-love/
