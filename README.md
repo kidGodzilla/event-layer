@@ -1,5 +1,41 @@
-# Electric Love
+![Electric Love](https://kidgodzilla.github.io/electric-love/electric-love-logo.png)
+
+-----
+
 A very very simple abstraction layer for analytics code. Write your events once, then send them where ever you want.
+
+Demo: https://kidgodzilla.github.io/electric-love/
+
+## Stats
+
+**Number of integrations:** 25
+
+**Number of tested integrations fully tested / considered stable & production-ready:** 7
+
+__Would you like to request an integration?__ Our current turn-around time is 72 hours (Add another week for testing). <a href="mailto:james@gumshoe.io">Email me</a> for more details. 
+
+If the docs are publicly available or it's supported by Analytics.js, I can turn around an implementation in 72 hours. 
+All I ask is that you make yourself available for testing / verification (this usually takes about a week).
+
+## Installation via NPM
+
+```
+npm install electric-love
+```
+
+Once installed, you'll need to include `electric-love.js` in your project, and then (optionally) instantiate a new object (aliasing it to a new global, if you prefer). Continue reading to see how that might work.
+
+## Installation via CDN
+
+Include one of the following scripts in your project:
+
+`https://unpkg.com/electric-love@latest/electric-love.js`
+
+or alternatively:
+
+`https://cdn.jsdelivr.net/npm/electric-love@latest/electric-love.js`
+
+Then follow the instructions below.
 
 ## What is it?
 
@@ -83,8 +119,8 @@ Below is an example of a blank adapter.
 'blank-adapter-template': { // Do not modify this template
     enabled: false, // Change to true once you're completed testing
     test: function () {},
-    onIdentify: function (userId, userProperties) {},
-    onTrack: function (eventName, eventProperties) {}
+    identify: function (userId, userProperties) {},
+    track: function (eventName, eventProperties) {}
 }
 ```
 
@@ -103,13 +139,13 @@ test: function () {
 
 (A simple example taken from the Google Analytics adapter)
 
-### 2. onIdentify:
+### 2. identify:
 This function takes data from our generic `identify` method, and passes it along to a third-party library, via an adapter.
 
 This should contain a minimal number of integrity checks and transforms, as well as a lightweight wrapper for the library's identify and/or describe functionality.
 
 ```
-onIdentify: function (userId, userProperties) {
+identify: function (userId, userProperties) {
     // Send the identify call to Mixpanel's JS library
     if (window.mixpanel && userId) 
         mixpanel.identify(userId);
@@ -122,13 +158,13 @@ onIdentify: function (userId, userProperties) {
 
 (A simple example taken from the Mixpanel adapter)
 
-### 3. onTrack:
+### 3. track:
 This function takes data from our generic `track` method, and passes it along to a third-party library, via an adapter.
 
 This should contain a minimal number of integrity checks and transforms, as well as a lightweight wrapper for the library's event tracking functionality.
 
 ```
-onTrack: function (eventName, eventProperties) {
+track: function (eventName, eventProperties) {
     // Send the tracked event to Heap's JS library
     if (window.heap && eventName) 
     heap.track(eventName, eventProperties);
@@ -157,14 +193,16 @@ Something you feel is missing? Open an issue (Although we may not be able to get
 
 ## Todos
 
-[ ] **NPM Package**
-
-[ ] Publish to **cdn.js**
+[ ] Publish to a **CDN**
 
 
 ## Why is it called ‘Electric Love’?
 
 No reason. Naming things is hard. Also https://youtu.be/RjmU-fou_6A is a pretty cool song (From the Bob's Burgers soundtrack).
 
+
+## That's stupid. Will you consider renaming it?
+
+Probably.
 
 ## Thanks!
