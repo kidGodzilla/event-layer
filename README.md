@@ -193,7 +193,7 @@ Something you feel is missing? Open an issue (Although we may not be able to get
 
 ## Todos
 
-[ ] Publish to a **CDN**
+(Completed)
 
 
 ## Why is it called ‘Electric Love’?
