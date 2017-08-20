@@ -2,6 +2,10 @@
 
 -----
 
+[![npm version](https://badge.fury.io/js/electric-love.svg)](https://www.npmjs.com/package/electric-love)
+[![License](https://img.shields.io/badge/license-MIT%20License-blue.svg)](https://opensource.org/licenses/MIT)
+![Contains](https://img.shields.io/badge/contains-badges-orange.svg)
+
 A very very simple abstraction layer for analytics code. Write your events once, then send them where ever you want.
 
 Demo: https://kidgodzilla.github.io/electric-love/
