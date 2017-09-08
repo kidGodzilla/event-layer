@@ -556,6 +556,27 @@ var ElectricLove = (function ElectricLove () {
                 if (userId) _kiq.push('identify', userId);
             }
         },
+        'facebook-tracking-pixel': {
+            enabled: true,
+            test: function () {
+                return !!(window.fbq && typeof window.fbq === 'function');
+            },
+            track: function (eventName, eventProperties) {
+                if (!window.fbq) return;
+
+                fbq('trackCustom', eventName, eventProperties);
+            },
+            page: function (category, name, properties) {
+                if (!window.fbq) return;
+
+                fbq('track', "PageView");
+            },
+            facebookTrackEvent: function (eventName, eventProperties) {
+                if (!window.fbq) return;
+
+                fbq('track', eventName, eventProperties);
+            }
+        },
         'blank-adapter-template': { // Do not modify this template
             enabled: false,
             test: function () {},
@@ -706,6 +727,114 @@ var ElectricLove = (function ElectricLove () {
         if (callback && typeof(callback) === 'function') callback();
     }
 
+    /**
+     * Added for Facebook tracking pixel support
+     */
+    function viewContent () {
+        if (!thirdPartyAdapters) return; // Early return if there are no adapters
+
+        onReady();
+
+        // Handle the Facebook tracking pixel case
+        var adapter = thirdPartyAdapters['facebook-tracking-pixel'];
+
+        if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
+            if (adapter.facebookTrackEvent && typeof(adapter.facebookTrackEvent) === 'function')
+                adapter.facebookTrackEvent('ViewContent', eventProperties);
+        }
+
+        // Iterate through third-party adapters, sending track events
+        for (var adapterName in thirdPartyAdapters) {
+            var adapter = thirdPartyAdapters[adapterName];
+
+            if (adapterName === 'facebook-tracking-pixel') continue; // Skip FB Tracking pixel
+
+            // If this adapter passes it's own internal test (usually to detect if a specific source is available)
+            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
+                // If everything checks out for the data we've received,
+                // pass the data to the adapter so it can be tracked
+                if (adapter.track && typeof(adapter.track) === 'function')
+                    adapter.track('ViewContent', eventProperties);
+            }
+        }
+
+        if (callback && typeof(callback) === 'function') callback();
+    }
+
+    function completeRegistration () {
+        if (!thirdPartyAdapters) return; // Early return if there are no adapters
+
+        onReady();
+
+        // Handle the Facebook tracking pixel case
+        var adapter = thirdPartyAdapters['facebook-tracking-pixel'];
+
+        if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
+            if (adapter.facebookTrackEvent && typeof(adapter.facebookTrackEvent) === 'function')
+                adapter.facebookTrackEvent('CompleteRegistration', eventProperties);
+        }
+
+        // Iterate through third-party adapters, sending track events
+        for (var adapterName in thirdPartyAdapters) {
+            var adapter = thirdPartyAdapters[adapterName];
+
+            if (adapterName === 'facebook-tracking-pixel') continue; // Skip FB Tracking pixel
+
+            // If this adapter passes it's own internal test (usually to detect if a specific source is available)
+            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
+                // If everything checks out for the data we've received,
+                // pass the data to the adapter so it can be tracked
+                if (adapter.track && typeof(adapter.track) === 'function')
+                    adapter.track('CompleteRegistration', eventProperties);
+            }
+        }
+
+        if (callback && typeof(callback) === 'function') callback();
+    }
+
+    function purchase () {
+        if (!thirdPartyAdapters) return; // Early return if there are no adapters
+
+        onReady();
+
+        // Handle the Facebook tracking pixel case
+        var adapter = thirdPartyAdapters['facebook-tracking-pixel'];
+
+        if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
+            if (adapter.facebookTrackEvent && typeof(adapter.facebookTrackEvent) === 'function')
+                adapter.facebookTrackEvent('Purchase', eventProperties);
+        }
+
+        // Iterate through third-party adapters, sending track events
+        for (var adapterName in thirdPartyAdapters) {
+            var adapter = thirdPartyAdapters[adapterName];
+
+            if (adapterName === 'facebook-tracking-pixel') continue; // Skip FB Tracking pixel
+
+            // If this adapter passes it's own internal test (usually to detect if a specific source is available)
+            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
+                // If everything checks out for the data we've received,
+                // pass the data to the adapter so it can be tracked
+                if (adapter.track && typeof(adapter.track) === 'function')
+                    adapter.track('Purchase', eventProperties);
+            }
+        }
+
+        if (callback && typeof(callback) === 'function') callback();
+    }
+
+    // Todo: (additional methods for facebook tracking pixel)
+    // Search
+    // AddToCart
+    // AddToWishlist
+    // InitiateCheckout
+    // AddPaymentInfo
+    // Lead
+
+
+    /**
+     * Electric Love default / boilerplate
+     */
     function ready (callback) {
         if (callback && typeof(callback) === 'function')
             ElectricLove.readyFunction = callback;
@@ -739,6 +868,11 @@ var ElectricLove = (function ElectricLove () {
     ElectricLove.alias = alias;
     ElectricLove.ready = ready;
     ElectricLove.page = page;
+
+    // Facebook-tracking pixel specific exports
+    ElectricLove.completeRegistration = completeRegistration;
+    ElectricLove.viewContent = viewContent;
+    ElectricLove.purchase = purchase;
 
     return function () {
         return ElectricLove;
