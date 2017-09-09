@@ -556,6 +556,27 @@ var ElectricLove = (function ElectricLove () {
                 if (userId) _kiq.push('identify', userId);
             }
         },
+        'facebook-tracking-pixel': {
+            enabled: true,
+            test: function () {
+                return !!(window.fbq && typeof window.fbq === 'function');
+            },
+            track: function (eventName, eventProperties) {
+                if (!window.fbq) return;
+
+                fbq('trackCustom', eventName, eventProperties);
+            },
+            page: function (category, name, properties) {
+                if (!window.fbq) return;
+
+                fbq('track', "PageView");
+            },
+            facebookTrackEvent: function (eventName, eventProperties) {
+                if (!window.fbq) return;
+
+                fbq('track', eventName, eventProperties);
+            }
+        },
         'blank-adapter-template': { // Do not modify this template
             enabled: false,
             test: function () {},
@@ -706,6 +727,52 @@ var ElectricLove = (function ElectricLove () {
         if (callback && typeof(callback) === 'function') callback();
     }
 
+    /**
+     * Facebook tracking pixel support
+     *
+     * Based on: https://developers.facebook.com/docs/facebook-pixel/api-reference
+     *
+     * Facebook tracking pixel specific event names:
+     * ViewContent
+     * Search
+     * AddToCart
+     * AddToWishlist
+     * InitiateCheckout
+     * AddPaymentInfo
+     * Purchase
+     * Lead
+     * CompleteRegistration
+     */
+    function fbTrack (eventName, eventProperties, options, callback) {
+        if (!thirdPartyAdapters) return; // Early return if there are no adapters
+
+        onReady();
+
+        // Iterate through third-party adapters, sending track events.
+        for (var adapterName in thirdPartyAdapters) {
+            var adapter = thirdPartyAdapters[adapterName];
+
+            if (adapterName === 'facebook-tracking-pixel') continue; // Skip FB Tracking pixel
+
+            // If this adapter passes it's own internal test (usually to detect if a specific source is available)
+            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
+                // If everything checks out for the data we've received,
+                // pass the data to the adapter so it can be tracked
+                if (adapter.facebookTrackEvent && typeof(adapter.facebookTrackEvent) === 'function') {
+                    adapter.facebookTrackEvent(eventName, eventProperties);
+                } else if (adapter.track && typeof(adapter.track) === 'function') {
+                    adapter.track(eventName, eventProperties);
+                }
+
+            }
+        }
+
+        if (callback && typeof(callback) === 'function') callback();
+    }
+
+    /**
+     * Electric Love defaults
+     */
     function ready (callback) {
         if (callback && typeof(callback) === 'function')
             ElectricLove.readyFunction = callback;
@@ -734,6 +801,7 @@ var ElectricLove = (function ElectricLove () {
     ElectricLove.Integrations = null; // This needs to be null so that it's not confused with Segment.com's library.
     ElectricLove.identify = identify;
     ElectricLove.onReady = onReady;
+    ElectricLove.fbTrack = fbTrack; // Facebook-tracking pixel
     ElectricLove.track = track;
     ElectricLove.group = group;
     ElectricLove.alias = alias;
