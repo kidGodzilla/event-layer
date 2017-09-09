@@ -12,7 +12,7 @@ Demo: https://kidgodzilla.github.io/electric-love/
 
 ## Stats
 
-**Number of integrations:** 25
+**Number of integrations:** 26
 
 **Number of tested integrations fully tested / considered stable & production-ready:** 7
 
@@ -58,6 +58,39 @@ configuration later to send your data anywhere you need.
 4. Instead of filling your app or website with service-specific tracking code, write generic code using the **“Electric Love” Javascript API** (described below).
 5. **“Electric Love”** will detect the third-party Analytics services you have installed on your website or app, and use it's own, community-maintained adapters to propagate your events, in an identical format, to each third-party service, using the latest version(s) of their APIs.
 6. **(Optional):** You can extend **“Electric Love”** by writing your own custom adapters for third-party services not yet supported. Each adapter only requires about 12 lines of Javascript, and the community is available to help you ship your first PR to **“Electric Love”**.
+
+
+## Integrations Currently Supported
+
+- Segment.com
+- Mixpanel
+- Google Analytics
+- Facebook Tracking Pixel
+- Google Tag Manager
+- Heap
+- Intercom
+- Amplitude
+- Keen.io
+- Helpscout
+- Fullstory
+- Olark
+- Calq
+- Sentry
+- Castle
+- Rollbar
+- Talkus
+- Crazy Egg
+- Elev.io
+- Drift
+- Drip
+- Lucky Orange
+- BugHerd
+- Bugsnag
+- Chameleon
+- Hello Bar
+- Improvely
+- Inspectlet
+- Qualaroo
 
 
 ## Instantiating a new instance of ElectricLove
@@ -113,6 +146,27 @@ Analytics.track('purchase', {
 ```
 
 This is similar to the `Track` method found in Mixpanel, Heap, and Analytics.js.
+
+## ElectricLove.page(category, name, properties)
+
+_This method has been implemented identially to Analytics.js. See documentation for more details. Feel free to open an issue if you have any questions!_
+
+## ElectricLove.alias(userId, previousId)
+
+_This method has been implemented identially to Analytics.js. See documentation for more details. Feel free to open an issue if you have any questions!_
+
+## ElectricLove.group(groupId, traits)
+
+_This method has been implemented identially to Analytics.js. See documentation for more details. Feel free to open an issue if you have any questions!_
+
+## ElectricLove.fbTrack(eventName, eventProperties)
+
+_Send track events to the facebook tracking pixel_
+
+This method implements a copy of the track() method above, but it supports events specific to the Facebook Tracking Pixel as well. 
+
+See documentation https://developers.facebook.com/docs/facebook-pixel/api-reference for more details on implementing the Facebook tracking pixel on your website.
+
 
 
 ## Writing an Adapter
