@@ -93,7 +93,7 @@ configuration later to send your data anywhere you need.
 - Qualaroo
 
 
-## Instantiating a new instance of ElectricLove
+## Creating a new instance of ElectricLove
 We realize that not everyone wants to litter their code with calls to a global named **“Electric Love”**. So you'll probably want to start off by instantiating a new instance of **“Electric Love”**.
 
 ```
