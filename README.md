@@ -60,7 +60,7 @@ configuration later to send your data anywhere you need.
 6. **(Optional):** You can extend **“Electric Love”** by writing your own custom adapters for third-party services not yet supported. Each adapter only requires about 12 lines of Javascript, and the community is available to help you ship your first PR to **“Electric Love”**.
 
 
-## Integrations Currently Supported
+## Integrations / Services Currently Supported
 
 - Segment.com
 - Mixpanel
