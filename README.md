@@ -1,4 +1,4 @@
-![Electric Love](https://kidgodzilla.github.io/electric-love/electric-love-logo.png)
+![Electric Love](https://kidgodzilla.github.io/electric-love/electric-love-logo.png?v2)
 
 -----
 
