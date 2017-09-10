@@ -615,6 +615,11 @@ var ElectricLove = (function ElectricLove () {
             if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so it can be tracked
+
+                // If TRANSLATE_EVENT_NAMES exists, use it to translate event names
+                if (window.TRANSLATE_EVENT_NAMES && typeof window.TRANSLATE_EVENT_NAMES == 'object')
+                    eventName = TRANSLATE_EVENT_NAMES(eventName);
+
                 if (adapter.track && typeof(adapter.track) === 'function')
                     adapter.track(eventName, eventProperties);
             }
@@ -761,6 +766,10 @@ var ElectricLove = (function ElectricLove () {
                 if (adapter.facebookTrackEvent && typeof(adapter.facebookTrackEvent) === 'function') {
                     adapter.facebookTrackEvent(eventName, eventProperties);
                 } else if (adapter.track && typeof(adapter.track) === 'function') {
+                    // If TRANSLATE_EVENT_NAMES exists, use it to translate event names
+                    if (window.TRANSLATE_EVENT_NAMES && typeof window.TRANSLATE_EVENT_NAMES == 'object')
+                        eventName = TRANSLATE_EVENT_NAMES(eventName);
+
                     adapter.track(eventName, eventProperties);
                 }
 
