@@ -617,7 +617,7 @@ var ElectricLove = (function ElectricLove () {
                 // pass the data to the adapter so it can be tracked
 
                 // If TRANSLATE_EVENT_NAMES exists, use it to translate event names
-                if (window.TRANSLATE_EVENT_NAMES && typeof window.TRANSLATE_EVENT_NAMES == 'object')
+                if (window.TRANSLATE_EVENT_NAMES && typeof window.TRANSLATE_EVENT_NAMES === 'object')
                     eventName = TRANSLATE_EVENT_NAMES(eventName);
 
                 if (adapter.track && typeof(adapter.track) === 'function')
@@ -767,7 +767,7 @@ var ElectricLove = (function ElectricLove () {
                     adapter.facebookTrackEvent(eventName, eventProperties);
                 } else if (adapter.track && typeof(adapter.track) === 'function') {
                     // If TRANSLATE_EVENT_NAMES exists, use it to translate event names
-                    if (window.TRANSLATE_EVENT_NAMES && typeof window.TRANSLATE_EVENT_NAMES == 'object')
+                    if (window.TRANSLATE_EVENT_NAMES && typeof window.TRANSLATE_EVENT_NAMES === 'object')
                         eventName = TRANSLATE_EVENT_NAMES(eventName);
 
                     adapter.track(eventName, eventProperties);
