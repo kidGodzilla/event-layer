@@ -1,5 +1,7 @@
 var ElectricLove = (function ElectricLove () {
 
+    var that = this;
+
     /**
      * Third-party adapters for ElectricLove.track(), ElectricLove.identify(), etc.
      */
@@ -594,11 +596,11 @@ var ElectricLove = (function ElectricLove () {
                 // Expects userProperties { id: string unique, email: string, created_at: unix-timestamp }
 
                 // Transform createdAt -> created_at
-                if (userProperties.createdAt && !userProperties.created_at)
+                if (userProperties && userProperties.createdAt && !userProperties.created_at)
                     userProperties.created_at = userProperties.createdAt;
 
                 // Add userId if no id is present
-                if (!userProperties.id)
+                if (userProperties && !userProperties.id)
                     userProperties.id = userId;
 
                 window._cio.identify(userProperties);
@@ -612,12 +614,12 @@ var ElectricLove = (function ElectricLove () {
             page: function (category, name, properties) {
                 if (!window._cio) return;
 
-                if (!this.currentUserId) return console.warn('You must call the Identify function for Customer.io before the page function, passing a valid userId.');
+                if (!window.__currentUserId) return console.warn('You must call the Identify function for Customer.io before the page function, passing a valid userId.');
                 if (!name) return console.warn('Customer.io requires a valid name property when calling the page event. Since Analytics.js expects a category field as well, this must be sent (even if it is empty). See documentation for more details.');
 
                 if (!properties) properties = {};
 
-                properties.id = this.currentUserId;
+                properties.id = window.__currentUserId;
                 properties.type = 'page';
                 properties.name = name;
                 properties.category = category;
@@ -682,7 +684,7 @@ var ElectricLove = (function ElectricLove () {
         onReady();
 
         // Stash this for later
-        this.currentUserId = userId;
+        window.__currentUserId = userId;
 
         for (var adapterName in thirdPartyAdapters) {
             var adapter = thirdPartyAdapters[adapterName];
@@ -858,7 +860,7 @@ var ElectricLove = (function ElectricLove () {
     window.ElectricLove = {};
     ElectricLove.thirdPartyAdapters = thirdPartyAdapters;
     ElectricLove.readyFunction = null;
-    ElectricLove.currentUserId = null;
+    window.__currentUserId = null;
     ElectricLove.Integrations = null; // This needs to be null so that it's not confused with Segment.com's library.
     ElectricLove.identify = identify;
     ElectricLove.onReady = onReady;
