@@ -577,6 +577,39 @@ var ElectricLove = (function ElectricLove () {
                 fbq('track', eventName, eventProperties);
             }
         },
+        'customerio': {
+            enabled: true,
+            test: function () {
+                return !!(window._cio && window._cio.push !== Array.prototype.push);
+            },
+            track: function (eventName, eventProperties) {
+                if (!window._cio) return;
+
+                window._cio.track(eventName, eventProperties);
+            },
+            identify: function (userId, userProperties) {
+                if (!window._cio) return;
+                if (!userId) return console.warn('user id required by customer.io for identify function.');
+
+                // Expects userProperties { id: string unique, email: string, created_at: unix-timestamp }
+
+                // Transform createdAt -> created_at
+                if (userProperties.createdAt && !userProperties.created_at)
+                    userProperties.created_at = userProperties.createdAt;
+
+                // Add userId if no id is present
+                if (!userProperties.id)
+                    userProperties.id = userId;
+
+                window._cio.identify(userProperties);
+            },
+            alias: function (userId, previousId) {
+                // Todo
+            },
+            group: function (groupId, traits) {
+                // Todo
+            }
+        },
         'blank-adapter-template': { // Do not modify this template
             enabled: false,
             test: function () {},
@@ -615,6 +648,11 @@ var ElectricLove = (function ElectricLove () {
             if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so it can be tracked
+
+                // If TRANSLATE_EVENT_NAMES exists, use it to translate event names
+                if (window.TRANSLATE_EVENT_NAMES && typeof window.TRANSLATE_EVENT_NAMES === 'object')
+                    eventName = TRANSLATE_EVENT_NAMES(eventName);
+
                 if (adapter.track && typeof(adapter.track) === 'function')
                     adapter.track(eventName, eventProperties);
             }
@@ -761,6 +799,10 @@ var ElectricLove = (function ElectricLove () {
                 if (adapter.facebookTrackEvent && typeof(adapter.facebookTrackEvent) === 'function') {
                     adapter.facebookTrackEvent(eventName, eventProperties);
                 } else if (adapter.track && typeof(adapter.track) === 'function') {
+                    // If TRANSLATE_EVENT_NAMES exists, use it to translate event names
+                    if (window.TRANSLATE_EVENT_NAMES && typeof window.TRANSLATE_EVENT_NAMES === 'object')
+                        eventName = TRANSLATE_EVENT_NAMES(eventName);
+
                     adapter.track(eventName, eventProperties);
                 }
 
