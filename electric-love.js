@@ -860,7 +860,6 @@ var ElectricLove = (function ElectricLove () {
     window.ElectricLove = {};
     ElectricLove.thirdPartyAdapters = thirdPartyAdapters;
     ElectricLove.readyFunction = null;
-    window.__currentUserId = null;
     ElectricLove.Integrations = null; // This needs to be null so that it's not confused with Segment.com's library.
     ElectricLove.identify = identify;
     ElectricLove.onReady = onReady;
@@ -870,6 +869,8 @@ var ElectricLove = (function ElectricLove () {
     ElectricLove.alias = alias;
     ElectricLove.ready = ready;
     ElectricLove.page = page;
+
+    window.__currentUserId = null;
 
     return function () {
         return ElectricLove;
