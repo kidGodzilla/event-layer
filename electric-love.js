@@ -608,6 +608,21 @@ var ElectricLove = (function ElectricLove () {
             },
             group: function (groupId, traits) {
                 // Todo
+            },
+            page: function (category, name, properties) {
+                if (!window._cio) return;
+
+                if (!this.currentUserId) return console.warn('You must call the Identify function for Customer.io before the page function, passing a valid userId.');
+                if (!name) return console.warn('Customer.io requires a valid name property when calling the page event. Since Analytics.js expects a category field as well, this must be sent (even if it is empty). See documentation for more details.');
+
+                if (!properties) properties = {};
+
+                properties.id = this.currentUserId;
+                properties.type = 'page';
+                properties.name = name;
+                properties.category = category;
+
+                window._cio.page(location.href, properties);
             }
         },
         'blank-adapter-template': { // Do not modify this template
@@ -665,6 +680,9 @@ var ElectricLove = (function ElectricLove () {
         if (!thirdPartyAdapters) return; // Early return if there are no adapters
 
         onReady();
+
+        // Stash this for later
+        this.currentUserId = userId;
 
         for (var adapterName in thirdPartyAdapters) {
             var adapter = thirdPartyAdapters[adapterName];
@@ -840,6 +858,7 @@ var ElectricLove = (function ElectricLove () {
     window.ElectricLove = {};
     ElectricLove.thirdPartyAdapters = thirdPartyAdapters;
     ElectricLove.readyFunction = null;
+    ElectricLove.currentUserId = null;
     ElectricLove.Integrations = null; // This needs to be null so that it's not confused with Segment.com's library.
     ElectricLove.identify = identify;
     ElectricLove.onReady = onReady;
