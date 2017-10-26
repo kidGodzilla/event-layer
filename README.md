@@ -12,7 +12,7 @@ Demo: https://kidgodzilla.github.io/electric-love/
 
 ## Stats
 
-**Number of integrations:** 26
+**Number of integrations:** 27
 
 **Number of tested integrations fully tested / considered stable & production-ready:** 7
 
@@ -91,6 +91,7 @@ configuration later to send your data anywhere you need.
 - Improvely
 - Inspectlet
 - Qualaroo
+- Customer.io
 
 
 ## Creating a new instance of ElectricLove

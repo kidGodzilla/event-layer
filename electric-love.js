@@ -577,6 +577,39 @@ var ElectricLove = (function ElectricLove () {
                 fbq('track', eventName, eventProperties);
             }
         },
+        'customerio': {
+            enabled: true,
+            test: function () {
+                return !!(window._cio && window._cio.push !== Array.prototype.push);
+            },
+            track: function (eventName, eventProperties) {
+                if (!window._cio) return;
+
+                window._cio.track(eventName, eventProperties);
+            },
+            identify: function (userId, userProperties) {
+                if (!window._cio) return;
+                if (!userId) return console.warn('user id required by customer.io for identify function.');
+
+                // Expects userProperties { id: string unique, email: string, created_at: unix-timestamp }
+
+                // Transform createdAt -> created_at
+                if (userProperties.createdAt && !userProperties.created_at)
+                    userProperties.created_at = userProperties.createdAt;
+
+                // Add userId if no id is present
+                if (!userProperties.id)
+                    userProperties.id = userId;
+
+                window._cio.identify(userProperties);
+            },
+            alias: function (userId, previousId) {
+                // Todo
+            },
+            group: function (groupId, traits) {
+                // Todo
+            }
+        },
         'blank-adapter-template': { // Do not modify this template
             enabled: false,
             test: function () {},
