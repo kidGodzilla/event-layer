@@ -142,14 +142,42 @@ var ElectricLove = (function ElectricLove () {
                 return window.ga && window.ga.loaded;
             },
             identify: function (userId, userProperties) {
-                if (window.ga) ga('set', 'userId', userId);
+                if (window.ga) {
+                    var tracker;
+
+                    try {
+                        tracker = ga.getAll()[0];
+                    } catch(e){}
+
+                    if (tracker) {
+                        tracker.send('set', 'userId', userId);
+                    } else {
+                        ga('set', 'userId', userId);
+                    }
+                }
             },
             track: function (eventName, eventProperties) {
-                if (window.ga) ga('send', {
-                    hitType: 'event',
-                    eventCategory: 'All',
-                    eventAction: eventName
-                });
+                if (window.ga) {
+                    var tracker;
+
+                    try {
+                        tracker = ga.getAll()[0];
+                    } catch(e){}
+
+                    if (tracker) {
+                        tracker.send('event', {
+                            hitType: 'event',
+                            eventCategory: 'All',
+                            eventAction: eventName
+                        });
+                    } else {
+                        ga('send', {
+                            hitType: 'event',
+                            eventCategory: 'All',
+                            eventAction: eventName
+                        });
+                    }
+                }
             }
         },
         'keen': {
