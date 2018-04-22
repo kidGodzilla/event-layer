@@ -1,4 +1,4 @@
-![Event Layer](https://kidgodzilla.github.io/event-layer/event-layer-logo.png)
+![Event Layer](https://raw.githubusercontent.com/kidGodzilla/event-layer/master/event-layer-logo.png)
 
 -----
 
