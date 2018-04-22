@@ -1,9 +1,9 @@
-var ElectricLove = (function ElectricLove () {
+var EventLayer = (function EventLayer () {
 
     var that = this;
 
     /**
-     * Third-party adapters for ElectricLove.track(), ElectricLove.identify(), etc.
+     * Third-party adapters for EventLayer.track(), EventLayer.identify(), etc.
      */
     var thirdPartyAdapters = {
         'segment': {
@@ -430,7 +430,7 @@ var ElectricLove = (function ElectricLove () {
                 if (!userProperties || !window._elev) return;
 
                 var user = {};
-                user.via = 'electric-love';
+                user.via = 'event-layer';
 
                 if (userProperties.email) user.email = userProperties.email;
                 if (userProperties.name) user.name = userProperties.name;
@@ -861,19 +861,19 @@ var ElectricLove = (function ElectricLove () {
     }
 
     /**
-     * Electric Love defaults
+     * Event Layer defaults
      */
     function ready (callback) {
         if (callback && typeof(callback) === 'function')
-            ElectricLove.readyFunction = callback;
+            EventLayer.readyFunction = callback;
     }
 
     function onReady () {
-        if (!ElectricLove.readyFunction) return;
+        if (!EventLayer.readyFunction) return;
 
-        if (ElectricLove.readyFunction && typeof(ElectricLove.readyFunction) === 'function') ElectricLove.readyFunction();
+        if (EventLayer.readyFunction && typeof(EventLayer.readyFunction) === 'function') EventLayer.readyFunction();
 
-        ElectricLove.readyFunction = null;
+        EventLayer.readyFunction = null;
     }
 
     // Execute directly before the first track/identify/page/group/alias call, or after a default timeout (5s)
@@ -885,23 +885,23 @@ var ElectricLove = (function ElectricLove () {
     // Selecting Integrations should match analytics.js syntax
 
     // Create / export globals
-    window.ElectricLove = {};
-    ElectricLove.thirdPartyAdapters = thirdPartyAdapters;
-    ElectricLove.readyFunction = null;
-    ElectricLove.Integrations = null; // This needs to be null so that it's not confused with Segment.com's library.
-    ElectricLove.identify = identify;
-    ElectricLove.onReady = onReady;
-    ElectricLove.fbTrack = fbTrack; // Facebook-tracking pixel
-    ElectricLove.track = track;
-    ElectricLove.group = group;
-    ElectricLove.alias = alias;
-    ElectricLove.ready = ready;
-    ElectricLove.page = page;
+    window.EventLayer = {};
+    EventLayer.thirdPartyAdapters = thirdPartyAdapters;
+    EventLayer.readyFunction = null;
+    EventLayer.Integrations = null; // This needs to be null so that it's not confused with Segment.com's library.
+    EventLayer.identify = identify;
+    EventLayer.onReady = onReady;
+    EventLayer.fbTrack = fbTrack; // Facebook-tracking pixel
+    EventLayer.track = track;
+    EventLayer.group = group;
+    EventLayer.alias = alias;
+    EventLayer.ready = ready;
+    EventLayer.page = page;
 
     window.__currentUserId = null;
 
     return function () {
-        return ElectricLove;
+        return EventLayer;
     };
 
 })();

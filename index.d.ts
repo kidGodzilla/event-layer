@@ -1,6 +1,6 @@
-declare namespace ElectricLove {}
+declare namespace EventLayer {}
 
-declare class ElectricLove {
+declare class EventLayer {
     constructor();
 
     identify<T>(userId: string, userProperties?: T): void;
@@ -11,4 +11,4 @@ declare class ElectricLove {
     fbTrack<T>(eventName: string, eventProperties?: T): void;
 }
 
-export = ElectricLove;
+export = EventLayer;
