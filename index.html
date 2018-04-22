@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Electric-love.js Demo</title>
+    <title>Event-layer.js Demo</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css"/>
 
@@ -40,13 +40,13 @@
 <article class="markdown-body entry-content" itemprop="text">
 
     <!--<h1>-->
-        <!--<a id="user-content-electric-love" class="anchor" href="#electric-love" aria-hidden="true">-->
+        <!--<a id="user-content-event-layer" class="anchor" href="#event-layer" aria-hidden="true">-->
             <!--<svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg>-->
         <!--</a>-->
-        <!--Electric Love-->
+        <!--Event Layer-->
     <!--</h1>-->
 
-    <img src="electric-love-logo.png" style="height:110px;margin: 0 auto;display: block;margin-bottom: 50px;" alt=""/>
+    <img src="event-layer-logo.png" style="height:110px;margin: 0 auto;display: block;margin-bottom: 50px;" alt=""/>
 
     <hr/>
 
@@ -55,25 +55,25 @@
     <a href="#demo">Scroll Down for a Demo</a>
 
     <h2><a id="user-content-what-is-it" class="anchor" href="#what-is-it" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>What is it?</h2>
-    <p><strong>“Electric Love”</strong> is an extensible abstraction layer for working with common third-party Analytics libraries.</p>
+    <p><strong>“Event Layer”</strong> is an extensible abstraction layer for working with common third-party Analytics libraries.</p>
     <p>Since more or less all analytics libraries work the same way (allowing you to identify and describe users, and track the events which they perform),
-        <strong>“Electric Love”</strong> creates an abstraction layer and a set of adapters that allow you to write generic Analytics Tracking code once, and update your
+        <strong>“Event Layer”</strong> creates an abstraction layer and a set of adapters that allow you to write generic Analytics Tracking code once, and update your
         configuration later to send your data anywhere you need.</p>
     <h2><a id="user-content-how-does-it-work" class="anchor" href="#how-does-it-work" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>How does it work?</h2>
     <ol>
         <li>Install your third-party analytics libraries in your application or website (you don't need to do anything special)</li>
-        <li>Install <code>electric-love.js</code> in your website or app.</li>
-        <li>Instantiate a new instance of <strong>ElectricLove:</strong> (e.g. <code>var Analytics = new ElectricLove();</code>).</li>
-        <li>Instead of filling your app or website with service-specific tracking code, write generic code using the <strong>“Electric Love” Javascript API</strong> (described below).</li>
-        <li><strong>“Electric Love”</strong> will detect the third-party Analytics services you have installed on your website or app, and use it's own, community-maintained adapters to propagate your events, in an identical format, to each third-party service, using the latest version(s) of their APIs.</li>
-        <li><strong>(Optional):</strong> You can extend <strong>“Electric Love”</strong> by writing your own custom adapters for third-party services not yet supported. Each adapter only requires about 12 lines of Javascript, and the community is available to help you ship your first PR to <strong>“Electric Love”</strong>.</li>
+        <li>Install <code>event-layer.js</code> in your website or app.</li>
+        <li>Instantiate a new instance of <strong>EventLayer:</strong> (e.g. <code>var Analytics = new EventLayer();</code>).</li>
+        <li>Instead of filling your app or website with service-specific tracking code, write generic code using the <strong>“Event Layer” Javascript API</strong> (described below).</li>
+        <li><strong>“Event Layer”</strong> will detect the third-party Analytics services you have installed on your website or app, and use it's own, community-maintained adapters to propagate your events, in an identical format, to each third-party service, using the latest version(s) of their APIs.</li>
+        <li><strong>(Optional):</strong> You can extend <strong>“Event Layer”</strong> by writing your own custom adapters for third-party services not yet supported. Each adapter only requires about 12 lines of Javascript, and the community is available to help you ship your first PR to <strong>“Event Layer”</strong>.</li>
     </ol>
-    <h2><a id="user-content-instantiating-a-new-instance-of-electriclove" class="anchor" href="#instantiating-a-new-instance-of-electriclove" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Instantiating a new instance of ElectricLove</h2>
-    <p>We realize that not everyone wants to litter their code with calls to a global named <strong>“Electric Love”</strong>. So you'll probably want to start off by instantiating a new instance of <strong>“Electric Love”</strong>.</p>
-<pre><code>var Analytics = new ElectricLove();
+    <h2><a id="user-content-instantiating-a-new-instance-of-eventlayer" class="anchor" href="#instantiating-a-new-instance-of-eventlayer" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Instantiating a new instance of EventLayer</h2>
+    <p>We realize that not everyone wants to litter their code with calls to a global named <strong>“Event Layer”</strong>. So you'll probably want to start off by instantiating a new instance of <strong>“Event Layer”</strong>.</p>
+<pre><code>var Analytics = new EventLayer();
 </code></pre>
     <p>You can name it whatever you like, but the examples given below will need to be modified appropriately.</p>
-    <h2><a id="user-content-electricloveidentifyuserid-userproperties" class="anchor" href="#electricloveidentifyuserid-userproperties" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ElectricLove.identify(userId, userProperties)</h2>
+    <h2><a id="user-content-eventlayeridentifyuserid-userproperties" class="anchor" href="#eventlayeridentifyuserid-userproperties" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>EventLayer.identify(userId, userProperties)</h2>
     <p>This method allows you to identify the current visitor, and (optionally) describe the user.</p>
     <p><em>Only identify the user, do not describe any user properties:</em></p>
 <pre><code>Analytics.identify('&lt;unique-user-id&gt;');
@@ -85,7 +85,7 @@
 });
 </code></pre>
     <p>This is similar to the <code>Identify</code> method found in Mixpanel, Heap, and Analytics.js.</p>
-    <h2><a id="user-content-electriclovetrackeventname-eventproperties" class="anchor" href="#electriclovetrackeventname-eventproperties" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ElectricLove.track(eventName, eventProperties)</h2>
+    <h2><a id="user-content-eventlayertrackeventname-eventproperties" class="anchor" href="#eventlayertrackeventname-eventproperties" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>EventLayer.track(eventName, eventProperties)</h2>
     <p>This method allows you to identify the current visitor, and (optionally) describe the user.</p>
     <p><em>Track a simple event, with no event properties:</em></p>
 <pre><code>Analytics.track('click_signup_button');
@@ -153,7 +153,7 @@
     <p>Something feel broken? Open an issue!
         Something you feel is missing? Open an issue (Although we may not be able to get to everything, pull requests are most welcome!)</p>
 
-    <h2><a id="user-content-why-is-it-called-electric-love" class="anchor" href="#why-is-it-called-electric-love" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Why is it called ‘Electric Love’?</h2>
+    <h2><a id="user-content-why-is-it-called-event-layer" class="anchor" href="#why-is-it-called-event-layer" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Why is it called ‘Event Layer’?</h2>
     <p>No reason. Naming things is hard. Also <a href="https://youtu.be/RjmU-fou_6A">https://youtu.be/RjmU-fou_6A</a> is a pretty cool song (From the Bob's Burgers soundtrack).</p>
     <h2><a id="user-content-thanks" class="anchor" href="#thanks" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Thanks!</h2>
 
@@ -161,7 +161,7 @@
 
     <h2 id="demo" style="margin-bottom: 15px">Demo:</h2>
 
-    <p>For this demo, we include Google Analytics and the <strong>electric-love.js</strong> library, instantiate electric-love as <strong>`Analytics`</strong>, and track an event called <strong>`button_clicked`</strong> when the button is clicked. You can inspect this page to see how the demo works.</p>
+    <p>For this demo, we include Google Analytics and the <strong>event-layer.js</strong> library, instantiate event-layer as <strong>`Analytics`</strong>, and track an event called <strong>`button_clicked`</strong> when the button is clicked. You can inspect this page to see how the demo works.</p>
 
     <button onclick="Analytics.track('button_clicked');alert('Event `button_clicked` tracked (you can inspect it in the network tab of your console)');">Click me</button>
 
@@ -169,10 +169,10 @@
 
 </article>
 
-<script src="electric-love.js"></script>
+<script src="event-layer.js"></script>
 
 <script>
-    var Analytics = new ElectricLove();
+    var Analytics = new EventLayer();
 </script>
 
 <!-- Google Analytics tracking code -->

@@ -14,3 +14,4 @@ Integrations Progress
 11. Inspectlet: Implementation completed (identify, track, page)
 12. Qualaroo: Partially implemented (identify). Track not implemented (dependency).
 13. Facebook Tracking Pixel: Partially implemented. Track and Pageviews have been implemented, however, facebook tracking pixel also supports nine custom events. Three have been implemented.
+14. Customer.io: Untested, Added integration based on Segment.com integration & available documentation.

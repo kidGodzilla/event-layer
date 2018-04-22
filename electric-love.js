@@ -1,7 +1,9 @@
-var ElectricLove = (function ElectricLove () {
+var EventLayer = (function EventLayer () {
+
+    var that = this;
 
     /**
-     * Third-party adapters for ElectricLove.track(), ElectricLove.identify(), etc.
+     * Third-party adapters for EventLayer.track(), EventLayer.identify(), etc.
      */
     var thirdPartyAdapters = {
         'segment': {
@@ -428,7 +430,7 @@ var ElectricLove = (function ElectricLove () {
                 if (!userProperties || !window._elev) return;
 
                 var user = {};
-                user.via = 'electric-love';
+                user.via = 'event-layer';
 
                 if (userProperties.email) user.email = userProperties.email;
                 if (userProperties.name) user.name = userProperties.name;
@@ -605,6 +607,54 @@ var ElectricLove = (function ElectricLove () {
                 fbq('track', eventName, eventProperties);
             }
         },
+        'customerio': {
+            enabled: true,
+            test: function () {
+                return !!(window._cio && window._cio.push !== Array.prototype.push);
+            },
+            track: function (eventName, eventProperties) {
+                if (!window._cio) return;
+
+                window._cio.track(eventName, eventProperties);
+            },
+            identify: function (userId, userProperties) {
+                if (!window._cio) return;
+                if (!userId) return console.warn('user id required by customer.io for identify function.');
+
+                // Expects userProperties { id: string unique, email: string, created_at: unix-timestamp }
+
+                // Transform createdAt -> created_at
+                if (userProperties && userProperties.createdAt && !userProperties.created_at)
+                    userProperties.created_at = userProperties.createdAt;
+
+                // Add userId if no id is present
+                if (userProperties && !userProperties.id)
+                    userProperties.id = userId;
+
+                window._cio.identify(userProperties);
+            },
+            alias: function (userId, previousId) {
+                // Todo
+            },
+            group: function (groupId, traits) {
+                // Todo
+            },
+            page: function (category, name, properties) {
+                if (!window._cio) return;
+
+                if (!window.__currentUserId) return console.warn('You must call the Identify function for Customer.io before the page function, passing a valid userId.');
+                if (!name) return console.warn('Customer.io requires a valid name property when calling the page event. Since Analytics.js expects a category field as well, this must be sent (even if it is empty). See documentation for more details.');
+
+                if (!properties) properties = {};
+
+                properties.id = window.__currentUserId;
+                properties.type = 'page';
+                properties.name = name;
+                properties.category = category;
+
+                window._cio.page(location.href, properties);
+            }
+        },
         'blank-adapter-template': { // Do not modify this template
             enabled: false,
             test: function () {},
@@ -643,6 +693,11 @@ var ElectricLove = (function ElectricLove () {
             if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so it can be tracked
+
+                // If TRANSLATE_EVENT_NAMES exists, use it to translate event names
+                if (window.TRANSLATE_EVENT_NAMES && typeof window.TRANSLATE_EVENT_NAMES === 'object')
+                    eventName = TRANSLATE_EVENT_NAMES(eventName);
+
                 if (adapter.track && typeof(adapter.track) === 'function')
                     adapter.track(eventName, eventProperties);
             }
@@ -655,6 +710,9 @@ var ElectricLove = (function ElectricLove () {
         if (!thirdPartyAdapters) return; // Early return if there are no adapters
 
         onReady();
+
+        // Stash this for later
+        window.__currentUserId = userId;
 
         for (var adapterName in thirdPartyAdapters) {
             var adapter = thirdPartyAdapters[adapterName];
@@ -789,6 +847,10 @@ var ElectricLove = (function ElectricLove () {
                 if (adapter.facebookTrackEvent && typeof(adapter.facebookTrackEvent) === 'function') {
                     adapter.facebookTrackEvent(eventName, eventProperties);
                 } else if (adapter.track && typeof(adapter.track) === 'function') {
+                    // If TRANSLATE_EVENT_NAMES exists, use it to translate event names
+                    if (window.TRANSLATE_EVENT_NAMES && typeof window.TRANSLATE_EVENT_NAMES === 'object')
+                        eventName = TRANSLATE_EVENT_NAMES(eventName);
+
                     adapter.track(eventName, eventProperties);
                 }
 
@@ -799,19 +861,19 @@ var ElectricLove = (function ElectricLove () {
     }
 
     /**
-     * Electric Love defaults
+     * Event Layer defaults
      */
     function ready (callback) {
         if (callback && typeof(callback) === 'function')
-            ElectricLove.readyFunction = callback;
+            EventLayer.readyFunction = callback;
     }
 
     function onReady () {
-        if (!ElectricLove.readyFunction) return;
+        if (!EventLayer.readyFunction) return;
 
-        if (ElectricLove.readyFunction && typeof(ElectricLove.readyFunction) === 'function') ElectricLove.readyFunction();
+        if (EventLayer.readyFunction && typeof(EventLayer.readyFunction) === 'function') EventLayer.readyFunction();
 
-        ElectricLove.readyFunction = null;
+        EventLayer.readyFunction = null;
     }
 
     // Execute directly before the first track/identify/page/group/alias call, or after a default timeout (5s)
@@ -823,21 +885,23 @@ var ElectricLove = (function ElectricLove () {
     // Selecting Integrations should match analytics.js syntax
 
     // Create / export globals
-    window.ElectricLove = {};
-    ElectricLove.thirdPartyAdapters = thirdPartyAdapters;
-    ElectricLove.readyFunction = null;
-    ElectricLove.Integrations = null; // This needs to be null so that it's not confused with Segment.com's library.
-    ElectricLove.identify = identify;
-    ElectricLove.onReady = onReady;
-    ElectricLove.fbTrack = fbTrack; // Facebook-tracking pixel
-    ElectricLove.track = track;
-    ElectricLove.group = group;
-    ElectricLove.alias = alias;
-    ElectricLove.ready = ready;
-    ElectricLove.page = page;
+    window.EventLayer = {};
+    EventLayer.thirdPartyAdapters = thirdPartyAdapters;
+    EventLayer.readyFunction = null;
+    EventLayer.Integrations = null; // This needs to be null so that it's not confused with Segment.com's library.
+    EventLayer.identify = identify;
+    EventLayer.onReady = onReady;
+    EventLayer.fbTrack = fbTrack; // Facebook-tracking pixel
+    EventLayer.track = track;
+    EventLayer.group = group;
+    EventLayer.alias = alias;
+    EventLayer.ready = ready;
+    EventLayer.page = page;
+
+    window.__currentUserId = null;
 
     return function () {
-        return ElectricLove;
+        return EventLayer;
     };
 
 })();
