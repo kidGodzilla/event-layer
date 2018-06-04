@@ -1,4 +1,4 @@
-var EventLayer = (function EventLayer () {
+var EventLayer = (function EventLayer() {
 
     var that = this;
 
@@ -11,7 +11,7 @@ var EventLayer = (function EventLayer () {
             test: function () {
                 // This test not only tests for Segment's variety of Analytics.js,
                 // it distinguishes it from this library, so you can simply alias this to window.analytics without worry.
-                return window.analytics && typeof(window.analytics) === 'object' && window.analytics.Integrations && typeof(window.analytics.Integrations) === 'object';
+                return window.analytics && typeof (window.analytics) === 'object' && window.analytics.Integrations && typeof (window.analytics.Integrations) === 'object';
             },
             identify: function (userId, userProperties) {
                 // Send the identify call to Segment's Analytics.js library
@@ -37,6 +37,54 @@ var EventLayer = (function EventLayer () {
                 // Send the group call to Segment's Analytics.js library
                 // console.log('group: ', groupId, traits);
                 if (window.analytics && groupId) analytics.group(groupId, traits);
+            }
+        },
+        'snowplow': {
+            enabled: true,
+            test: function () {
+                return !!window.Snowplow;
+            },
+
+            identify: function (userId, userProperties, options) {
+
+                // console.log('snowplow::Identifying: ', userId, userProperties, options);
+
+                if (window.Snowplow && userId && checkOptions(options)) {
+
+                    window[options.snowplow.accessFunction]('setUserId', userId);
+
+                }
+
+                function checkOptions(options) {
+                    return options && options.snowplow &&
+                        typeof options.snowplow.accessFunction === 'string'
+                }
+            },
+
+            track: function (eventName, eventProperties, options) {
+
+                // console.log('snowplow::Tracking: ', eventName, eventProperties, options);
+
+                if (window.Snowplow && options.snowplow && checkOptions(options)) {
+
+                    if (options.snowplow.trackingMethod === 'trackSelfDescribingEvent')
+                        window[options.snowplow.accessFunction]('trackSelfDescribingEvent', eventProperties);
+                    else if (options.snowplow.trackingMethod === 'trackStructEvent')
+                        window[options.snowplow.accessFunction]('trackStructEvent',
+                            eventProperties.category,
+                            eventProperties.action,
+                            eventProperties.label,
+                            eventProperties.property,
+                            eventProperties.value
+                        );
+
+                }
+
+                function checkOptions(options) {
+                    return options && options.snowplow &&
+                        typeof options.snowplow.accessFunction === 'string' &&
+                        typeof options.snowplow.trackingMethod === 'string';
+                }
             }
         },
         'mixpanel': {
@@ -149,7 +197,7 @@ var EventLayer = (function EventLayer () {
 
                     try {
                         tracker = ga.getAll()[0];
-                    } catch(e){}
+                    } catch (e) { }
 
                     if (tracker) {
                         tracker.send('set', 'userId', userId);
@@ -164,7 +212,7 @@ var EventLayer = (function EventLayer () {
 
                     try {
                         tracker = ga.getAll()[0];
-                    } catch(e){}
+                    } catch (e) { }
 
                     if (tracker) {
                         tracker.send('event', {
@@ -320,7 +368,7 @@ var EventLayer = (function EventLayer () {
                 if (!groupId) return;
                 var options = {};
 
-                if (traits)  {
+                if (traits) {
                     for (var key in traits) {
                         options['group:' + key] = traits[key];
                     }
@@ -475,7 +523,7 @@ var EventLayer = (function EventLayer () {
         'drip': {
             enabled: true,
             test: function () {
-                return window._dc && typeof(window._dc) === 'object';
+                return window._dc && typeof (window._dc) === 'object';
             },
             track: function (eventName, eventProperties) {
                 if (!window._dcq || !eventName) return;
@@ -507,7 +555,7 @@ var EventLayer = (function EventLayer () {
         'bugsnag': {
             enabled: true,
             test: function () {
-                return window.Bugsnag && typeof(window.Bugsnag) === 'object';
+                return window.Bugsnag && typeof (window.Bugsnag) === 'object';
             },
             identify: function (userId, userProperties) {
                 if (!window.Bugsnag) return;
@@ -657,31 +705,31 @@ var EventLayer = (function EventLayer () {
         },
         'blank-adapter-template': { // Do not modify this template
             enabled: false,
-            test: function () {},
-            track: function (eventName, eventProperties) {},
-            identify: function (userId, userProperties) {},
-            page: function (category, name, properties) {},
-            alias: function (userId, previousId) {},
-            group: function (groupId, traits) {}
+            test: function () { },
+            track: function (eventName, eventProperties) { },
+            identify: function (userId, userProperties) { },
+            page: function (category, name, properties) { },
+            alias: function (userId, previousId) { },
+            group: function (groupId, traits) { }
         }
     };
 
     // Recursively convert an `obj`'s dates to new values, using an input function, convert().
-    function convertDates (oObj, convert) {
-        if (typeof(oObj) !== 'object') return oObj;
+    function convertDates(oObj, convert) {
+        if (typeof (oObj) !== 'object') return oObj;
 
         var obj = Object.assign({}, oObj);
 
         for (var key in obj) {
             var val = obj[key];
-            if (typeof(val) === 'date') obj[key] = convert(val);
-            if (typeof(val) === 'object') obj[key] = convertDates(val, convert);
+            if (typeof (val) === 'date') obj[key] = convert(val);
+            if (typeof (val) === 'object') obj[key] = convertDates(val, convert);
         }
 
         return obj;
     }
 
-    function track (eventName, eventProperties, options, callback) {
+    function track(eventName, eventProperties, options, callback) {
         if (!thirdPartyAdapters) return; // Early return if there are no adapters
 
         onReady();
@@ -690,7 +738,7 @@ var EventLayer = (function EventLayer () {
             var adapter = thirdPartyAdapters[adapterName];
 
             // If this adapter passes it's own internal test (usually to detect if a specific source is available)
-            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
+            if (adapter.enabled && adapter.test && typeof (adapter.test) === 'function' && adapter.test()) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so it can be tracked
 
@@ -698,15 +746,15 @@ var EventLayer = (function EventLayer () {
                 if (window.TRANSLATE_EVENT_NAMES && typeof window.TRANSLATE_EVENT_NAMES === 'object')
                     eventName = TRANSLATE_EVENT_NAMES(eventName);
 
-                if (adapter.track && typeof(adapter.track) === 'function')
-                    adapter.track(eventName, eventProperties);
+                if (adapter.track && typeof (adapter.track) === 'function')
+                    adapter.track(eventName, eventProperties, options);
             }
         }
 
-        if (callback && typeof(callback) === 'function') callback();
+        if (callback && typeof (callback) === 'function') callback();
     }
 
-    function identify (userId, userProperties, options, callback) {
+    function identify(userId, userProperties, options, callback) {
         if (!thirdPartyAdapters) return; // Early return if there are no adapters
 
         onReady();
@@ -718,24 +766,24 @@ var EventLayer = (function EventLayer () {
             var adapter = thirdPartyAdapters[adapterName];
 
             // If this adapter passes it's own internal test (usually to detect if a specific source is available)
-            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
+            if (adapter.enabled && adapter.test && typeof (adapter.test) === 'function' && adapter.test()) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so it can be tracked
-                if (adapter.identify && typeof(adapter.identify) === 'function')
-                    adapter.identify(userId, userProperties);
+                if (adapter.identify && typeof (adapter.identify) === 'function')
+                    adapter.identify(userId, userProperties, options);
             }
         }
 
-        if (callback && typeof(callback) === 'function') callback();
+        if (callback && typeof (callback) === 'function') callback();
     }
 
-    function page (category, name, properties, options, callback) {
+    function page(category, name, properties, options, callback) {
         if (!thirdPartyAdapters) return; // Early return if there are no adapters
 
         onReady();
 
         // Handle not passing the category (shift right)
-        if (category && (!name || typeof(name) !== 'string')) {
+        if (category && (!name || typeof (name) !== 'string')) {
             callback = options;
             options = properties;
             properties = name;
@@ -762,18 +810,18 @@ var EventLayer = (function EventLayer () {
             var adapter = thirdPartyAdapters[adapterName];
 
             // If this adapter passes it's own internal test (usually to detect if a specific source is available)
-            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
+            if (adapter.enabled && adapter.test && typeof (adapter.test) === 'function' && adapter.test()) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so it can be tracked
-                if (adapter.page && typeof(adapter.page) === 'function')
+                if (adapter.page && typeof (adapter.page) === 'function')
                     adapter.page(category, name, properties);
             }
         }
 
-        if (callback && typeof(callback) === 'function') callback();
+        if (callback && typeof (callback) === 'function') callback();
     }
 
-    function group (groupId, traits, options, callback) {
+    function group(groupId, traits, options, callback) {
         if (!thirdPartyAdapters) return; // Early return if there are no adapters
 
         onReady();
@@ -782,18 +830,18 @@ var EventLayer = (function EventLayer () {
             var adapter = thirdPartyAdapters[adapterName];
 
             // If this adapter passes it's own internal test (usually to detect if a specific source is available)
-            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
+            if (adapter.enabled && adapter.test && typeof (adapter.test) === 'function' && adapter.test()) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so we can perform a grouping
-                if (adapter.group && typeof(adapter.group) === 'function')
+                if (adapter.group && typeof (adapter.group) === 'function')
                     adapter.group(groupId, traits);
             }
         }
 
-        if (callback && typeof(callback) === 'function') callback();
+        if (callback && typeof (callback) === 'function') callback();
     }
 
-    function alias (userId, previousId, options, callback) {
+    function alias(userId, previousId, options, callback) {
         if (!thirdPartyAdapters) return; // Early return if there are no adapters
 
         onReady();
@@ -802,15 +850,15 @@ var EventLayer = (function EventLayer () {
             var adapter = thirdPartyAdapters[adapterName];
 
             // If this adapter passes it's own internal test (usually to detect if a specific source is available)
-            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
+            if (adapter.enabled && adapter.test && typeof (adapter.test) === 'function' && adapter.test()) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so we can alias this user
-                if (adapter.alias && typeof(adapter.alias) === 'function')
+                if (adapter.alias && typeof (adapter.alias) === 'function')
                     adapter.alias(userId, previousId);
             }
         }
 
-        if (callback && typeof(callback) === 'function') callback();
+        if (callback && typeof (callback) === 'function') callback();
     }
 
     /**
@@ -829,7 +877,7 @@ var EventLayer = (function EventLayer () {
      * Lead
      * CompleteRegistration
      */
-    function fbTrack (eventName, eventProperties, options, callback) {
+    function fbTrack(eventName, eventProperties, options, callback) {
         if (!thirdPartyAdapters) return; // Early return if there are no adapters
 
         onReady();
@@ -841,12 +889,12 @@ var EventLayer = (function EventLayer () {
             if (adapterName === 'facebook-tracking-pixel') continue; // Skip FB Tracking pixel
 
             // If this adapter passes it's own internal test (usually to detect if a specific source is available)
-            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
+            if (adapter.enabled && adapter.test && typeof (adapter.test) === 'function' && adapter.test()) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so it can be tracked
-                if (adapter.facebookTrackEvent && typeof(adapter.facebookTrackEvent) === 'function') {
+                if (adapter.facebookTrackEvent && typeof (adapter.facebookTrackEvent) === 'function') {
                     adapter.facebookTrackEvent(eventName, eventProperties);
-                } else if (adapter.track && typeof(adapter.track) === 'function') {
+                } else if (adapter.track && typeof (adapter.track) === 'function') {
                     // If TRANSLATE_EVENT_NAMES exists, use it to translate event names
                     if (window.TRANSLATE_EVENT_NAMES && typeof window.TRANSLATE_EVENT_NAMES === 'object')
                         eventName = TRANSLATE_EVENT_NAMES(eventName);
@@ -857,21 +905,21 @@ var EventLayer = (function EventLayer () {
             }
         }
 
-        if (callback && typeof(callback) === 'function') callback();
+        if (callback && typeof (callback) === 'function') callback();
     }
 
     /**
      * Event Layer defaults
      */
-    function ready (callback) {
-        if (callback && typeof(callback) === 'function')
+    function ready(callback) {
+        if (callback && typeof (callback) === 'function')
             EventLayer.readyFunction = callback;
     }
 
-    function onReady () {
+    function onReady() {
         if (!EventLayer.readyFunction) return;
 
-        if (EventLayer.readyFunction && typeof(EventLayer.readyFunction) === 'function') EventLayer.readyFunction();
+        if (EventLayer.readyFunction && typeof (EventLayer.readyFunction) === 'function') EventLayer.readyFunction();
 
         EventLayer.readyFunction = null;
     }
