@@ -187,7 +187,7 @@ var EventLayer = (function EventLayer () {
             // Todo: This test sucks (keen is not opinionated as to what global you place it in (you don't even need to expose it as a global),
             // but defaults to client, which is too common to use as a test.)
             test: function () {
-                return window.Keen && window.Keen.loaded && window.client;
+                return ((window.Keen && window.Keen.loaded) || ((window.KeenAsync && window.KeenAsync.loaded))) && window.client;
             },
             identify: function (userId, userProperties) {
                 if (window.client && userId) client.extendEvents({
