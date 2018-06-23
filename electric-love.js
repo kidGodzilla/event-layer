@@ -698,8 +698,13 @@ var EventLayer = (function EventLayer () {
                 if (window.TRANSLATE_EVENT_NAMES && typeof window.TRANSLATE_EVENT_NAMES === 'object')
                     eventName = TRANSLATE_EVENT_NAMES(eventName);
 
-                if (adapter.track && typeof(adapter.track) === 'function')
-                    adapter.track(eventName, eventProperties);
+                if (adapter.track && typeof(adapter.track) === 'function') {
+                    try {
+                        adapter.track(eventName, eventProperties);
+                    } catch (e) {
+                        console.warn('Analytics.js Error', e);
+                    }
+                }
             }
         }
 
@@ -721,8 +726,14 @@ var EventLayer = (function EventLayer () {
             if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so it can be tracked
-                if (adapter.identify && typeof(adapter.identify) === 'function')
-                    adapter.identify(userId, userProperties);
+                if (adapter.identify && typeof(adapter.identify) === 'function') {
+                    try {
+                        adapter.identify(userId, userProperties);
+                    } catch (e) {
+                        console.warn('Analytics.js Error', e);
+                    }
+                }
+
             }
         }
 
@@ -765,8 +776,14 @@ var EventLayer = (function EventLayer () {
             if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so it can be tracked
-                if (adapter.page && typeof(adapter.page) === 'function')
-                    adapter.page(category, name, properties);
+                if (adapter.page && typeof(adapter.page) === 'function') {
+                    try {
+                        adapter.page(category, name, properties);
+                    } catch (e) {
+                        console.warn('Analytics.js Error', e);
+                    }
+                }
+
             }
         }
 
@@ -785,8 +802,13 @@ var EventLayer = (function EventLayer () {
             if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so we can perform a grouping
-                if (adapter.group && typeof(adapter.group) === 'function')
-                    adapter.group(groupId, traits);
+                if (adapter.group && typeof(adapter.group) === 'function') {
+                    try {
+                        adapter.group(groupId, traits);
+                    } catch (e) {
+                        console.warn('Analytics.js Error', e);
+                    }
+                }
             }
         }
 
@@ -805,8 +827,13 @@ var EventLayer = (function EventLayer () {
             if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so we can alias this user
-                if (adapter.alias && typeof(adapter.alias) === 'function')
-                    adapter.alias(userId, previousId);
+                if (adapter.alias && typeof(adapter.alias) === 'function') {
+                    try {
+                        adapter.alias(userId, previousId);
+                    } catch (e) {
+                        console.warn('Analytics.js Error', e);
+                    }
+                }
             }
         }
 
@@ -845,13 +872,22 @@ var EventLayer = (function EventLayer () {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so it can be tracked
                 if (adapter.facebookTrackEvent && typeof(adapter.facebookTrackEvent) === 'function') {
-                    adapter.facebookTrackEvent(eventName, eventProperties);
+                    try {
+                        adapter.facebookTrackEvent(eventName, eventProperties);
+                    } catch (e) {
+                        console.warn('Analytics.js Error', e);
+                    }
+
                 } else if (adapter.track && typeof(adapter.track) === 'function') {
                     // If TRANSLATE_EVENT_NAMES exists, use it to translate event names
                     if (window.TRANSLATE_EVENT_NAMES && typeof window.TRANSLATE_EVENT_NAMES === 'object')
                         eventName = TRANSLATE_EVENT_NAMES(eventName);
 
-                    adapter.track(eventName, eventProperties);
+                    try {
+                        adapter.track(eventName, eventProperties);
+                    } catch (e) {
+                        console.warn('Analytics.js Error', e);
+                    }
                 }
 
             }
