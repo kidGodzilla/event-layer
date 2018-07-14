@@ -206,6 +206,18 @@ var EventLayer = (function EventLayer () {
                             page: name || properties.path
                         });
                     }
+                    // Default (Simpler) approach used by GA default code snippet:
+                    // ga('send', 'pageview');
+
+                    // See: https://developers.google.com/analytics/devguides/collection/analyticsjs/pages
+
+                    // A more robust implementation for programmatic use:
+//                     if (category) properties.category = category;
+
+//                     properties.page = name || location.pathname;
+//                     window.ga('set', properties);
+//                     window.ga('send', 'pageview', location.pathname, properties);
+
                 }
             }
         },
