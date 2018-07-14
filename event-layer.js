@@ -189,35 +189,23 @@ var EventLayer = (function EventLayer () {
                         tracker = ga.getAll()[0];
                     } catch(e){}
 
-                    if (tracker) {
-                        tracker.send({
-                            hitType: 'pageview',
-                            title: properties.title,
-                            location: properties.url,
-                            referrer: properties.referrer,
-                            page: name || properties.path
-                        });
-                    } else {
-                        ga('send', {
-                            hitType: 'pageview',
-                            title: properties.title,
-                            location: properties.url,
-                            referrer: properties.referrer,
-                            page: name || properties.path
-                        });
-                    }
-                    // Default (Simpler) approach used by GA default code snippet:
-                    // ga('send', 'pageview');
-
                     // See: https://developers.google.com/analytics/devguides/collection/analyticsjs/pages
 
-                    // A more robust implementation for programmatic use:
-//                     if (category) properties.category = category;
+                    if (category) properties.category = category;
+                    properties.hitType = 'pageview';
+                    properties.page = name || properties.path;
+                    properties.location = properties.url;
 
-//                     properties.page = name || location.pathname;
-//                     window.ga('set', properties);
-//                     window.ga('send', 'pageview', location.pathname, properties);
+                    if (tracker) {
+                        tracker.set(properties);
+                        tracker.send(properties);
+                    } else {
+                        ga('set', properties);
+                        ga('send', properties);
+                    }
 
+                    // Default (Simpler) approach used by GA default code snippet:
+                    // ga('send', 'pageview');
                 }
             }
         },

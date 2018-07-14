@@ -141,7 +141,7 @@ var EventLayer = (function EventLayer () {
         'google-analytics': {
             enabled: true,
             test: function () {
-                return window.ga && window.ga.loaded;
+                return window.ga;
             },
             identify: function (userId, userProperties) {
                 if (window.ga) {
@@ -183,18 +183,30 @@ var EventLayer = (function EventLayer () {
             },
             page: function (category, name, properties) {
                 if (window.ga) {
-                    // Default (Simpler) approach used by GA default code snippet:
-                    // ga('send', 'pageview');
+                    var tracker;
+
+                    try {
+                        tracker = ga.getAll()[0];
+                    } catch(e){}
 
                     // See: https://developers.google.com/analytics/devguides/collection/analyticsjs/pages
 
-                    // A more robust implementation for programmatic use:
+                    properties.hitTime = 'pageview';
+                    properties.page = name || properties.path;
+                    properties.location = properties.url;
+
                     if (category) properties.category = category;
 
-                    properties.page = name || location.pathname;
-                    window.ga('set', properties);
-                    window.ga('send', 'pageview', location.pathname, properties);
+                    if (tracker) {
+                        tracker.set(properties);
+                        tracker.send(properties);
+                    } else {
+                        ga('set', properties);
+                        ga('send', properties);
+                    }
 
+                    // Default (Simpler) approach used by GA default code snippet:
+                    // ga('send', 'pageview');
                 }
             }
         },
@@ -714,13 +726,8 @@ var EventLayer = (function EventLayer () {
                 if (window.TRANSLATE_EVENT_NAMES && typeof window.TRANSLATE_EVENT_NAMES === 'object')
                     eventName = TRANSLATE_EVENT_NAMES(eventName);
 
-                if (adapter.track && typeof(adapter.track) === 'function') {
-                    try {
-                        adapter.track(eventName, eventProperties);
-                    } catch (e) {
-                        console.warn('Analytics.js Error', e);
-                    }
-                }
+                if (adapter.track && typeof(adapter.track) === 'function')
+                    adapter.track(eventName, eventProperties);
             }
         }
 
@@ -742,14 +749,8 @@ var EventLayer = (function EventLayer () {
             if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so it can be tracked
-                if (adapter.identify && typeof(adapter.identify) === 'function') {
-                    try {
-                        adapter.identify(userId, userProperties);
-                    } catch (e) {
-                        console.warn('Analytics.js Error', e);
-                    }
-                }
-
+                if (adapter.identify && typeof(adapter.identify) === 'function')
+                    adapter.identify(userId, userProperties);
             }
         }
 
@@ -792,14 +793,8 @@ var EventLayer = (function EventLayer () {
             if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so it can be tracked
-                if (adapter.page && typeof(adapter.page) === 'function') {
-                    try {
-                        adapter.page(category, name, properties);
-                    } catch (e) {
-                        console.warn('Analytics.js Error', e);
-                    }
-                }
-
+                if (adapter.page && typeof(adapter.page) === 'function')
+                    adapter.page(category, name, properties);
             }
         }
 
@@ -818,13 +813,8 @@ var EventLayer = (function EventLayer () {
             if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so we can perform a grouping
-                if (adapter.group && typeof(adapter.group) === 'function') {
-                    try {
-                        adapter.group(groupId, traits);
-                    } catch (e) {
-                        console.warn('Analytics.js Error', e);
-                    }
-                }
+                if (adapter.group && typeof(adapter.group) === 'function')
+                    adapter.group(groupId, traits);
             }
         }
 
@@ -843,13 +833,8 @@ var EventLayer = (function EventLayer () {
             if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so we can alias this user
-                if (adapter.alias && typeof(adapter.alias) === 'function') {
-                    try {
-                        adapter.alias(userId, previousId);
-                    } catch (e) {
-                        console.warn('Analytics.js Error', e);
-                    }
-                }
+                if (adapter.alias && typeof(adapter.alias) === 'function')
+                    adapter.alias(userId, previousId);
             }
         }
 
@@ -888,22 +873,13 @@ var EventLayer = (function EventLayer () {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so it can be tracked
                 if (adapter.facebookTrackEvent && typeof(adapter.facebookTrackEvent) === 'function') {
-                    try {
-                        adapter.facebookTrackEvent(eventName, eventProperties);
-                    } catch (e) {
-                        console.warn('Analytics.js Error', e);
-                    }
-
+                    adapter.facebookTrackEvent(eventName, eventProperties);
                 } else if (adapter.track && typeof(adapter.track) === 'function') {
                     // If TRANSLATE_EVENT_NAMES exists, use it to translate event names
                     if (window.TRANSLATE_EVENT_NAMES && typeof window.TRANSLATE_EVENT_NAMES === 'object')
                         eventName = TRANSLATE_EVENT_NAMES(eventName);
 
-                    try {
-                        adapter.track(eventName, eventProperties);
-                    } catch (e) {
-                        console.warn('Analytics.js Error', e);
-                    }
+                    adapter.track(eventName, eventProperties);
                 }
 
             }
