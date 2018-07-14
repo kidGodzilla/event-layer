@@ -141,7 +141,7 @@ var EventLayer = (function EventLayer () {
         'google-analytics': {
             enabled: true,
             test: function () {
-                return window.ga && window.ga.loaded;
+                return window.ga;
             },
             identify: function (userId, userProperties) {
                 if (window.ga) {
@@ -183,17 +183,40 @@ var EventLayer = (function EventLayer () {
             },
             page: function (category, name, properties) {
                 if (window.ga) {
+                    var tracker;
+
+                    try {
+                        tracker = ga.getAll()[0];
+                    } catch(e){}
+
+                    if (tracker) {
+                        tracker.send({
+                            hitType: 'pageview',
+                            title: properties.title,
+                            location: properties.url,
+                            referrer: properties.referrer,
+                            page: name || properties.path
+                        });
+                    } else {
+                        ga('send', {
+                            hitType: 'pageview',
+                            title: properties.title,
+                            location: properties.url,
+                            referrer: properties.referrer,
+                            page: name || properties.path
+                        });
+                    }
                     // Default (Simpler) approach used by GA default code snippet:
                     // ga('send', 'pageview');
 
                     // See: https://developers.google.com/analytics/devguides/collection/analyticsjs/pages
 
                     // A more robust implementation for programmatic use:
-                    if (category) properties.category = category;
+//                     if (category) properties.category = category;
 
-                    properties.page = name || location.pathname;
-                    window.ga('set', properties);
-                    window.ga('send', 'pageview', location.pathname, properties);
+//                     properties.page = name || location.pathname;
+//                     window.ga('set', properties);
+//                     window.ga('send', 'pageview', location.pathname, properties);
 
                 }
             }
