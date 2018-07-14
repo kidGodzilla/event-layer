@@ -192,18 +192,18 @@ var EventLayer = (function EventLayer () {
                     if (tracker) {
                         tracker.send({
                             hitType: 'pageview',
-                            title: properties["title"],
-                            location: properties["url"],
-                            referrer: properties["referrer"],
-                            page: name || properties["path"]
+                            title: properties.title,
+                            location: properties.url,
+                            referrer: properties.referrer,
+                            page: name || properties.path
                         });
                     } else {
                         ga('send', {
                             hitType: 'pageview',
-                            title: properties["title"],
-                            location: properties["url"],
-                            referrer: properties["referrer"],
-                            page: name || properties["path"]
+                            title: properties.title,
+                            location: properties.url,
+                            referrer: properties.referrer,
+                            page: name || properties.path
                         });
                     }
                 }
