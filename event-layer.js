@@ -141,7 +141,7 @@ var EventLayer = (function EventLayer () {
         'google-analytics': {
             enabled: true,
             test: function () {
-                return window.ga && window.ga.loaded;
+                return window.ga;
             },
             identify: function (userId, userProperties = {}) {
                 if (window.ga) {
@@ -156,6 +156,33 @@ var EventLayer = (function EventLayer () {
                     }
                     eventProperties.eventAction = eventName;
                     ga('send', 'event', eventProperties);
+                }
+            },
+            page: function (category, name, properties) {
+                if (window.ga) {
+                    var tracker;
+
+                    try {
+                        tracker = ga.getAll()[0];
+                    } catch(e){}
+
+                    // See: https://developers.google.com/analytics/devguides/collection/analyticsjs/pages
+
+                    if (category) properties.category = category;
+                    properties.hitType = 'pageview';
+                    properties.page = name || properties.path;
+                    properties.location = properties.url;
+
+                    if (tracker) {
+                        tracker.set(properties);
+                        tracker.send(properties);
+                    } else {
+                        ga('set', properties);
+                        ga('send', properties);
+                    }
+
+                    // Default (Simpler) approach used by GA default code snippet:
+                    // ga('send', 'pageview');
                 }
             }
         },
