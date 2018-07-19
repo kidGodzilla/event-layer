@@ -164,6 +164,7 @@ var EventLayer = (function EventLayer () {
                     if (!eventProperties.hasOwnProperty("eventCategory")) {
                         eventProperties.eventCategory = "All"
                     }
+                    eventProperties.eventAction = eventName;
 
                     var tracker;
                     try {
