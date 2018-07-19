@@ -143,39 +143,19 @@ var EventLayer = (function EventLayer () {
             test: function () {
                 return window.ga && window.ga.loaded;
             },
-            identify: function (userId, userProperties) {
+            identify: function (userId, userProperties = {}) {
                 if (window.ga) {
-                    var tracker;
-
-                    try {
-                        tracker = ga.getAll()[0];
-                    } catch(e){}
-
-                    if (tracker) {
-                        tracker.send('set', 'userId', userId);
-                    } else {
-                        ga('set', 'userId', userId);
-                    }
+                    userProperties.userId = userId
+                    ga('set', userProperties);
                 }
             },
             track: function (eventName, eventProperties = {}) {
                 if (window.ga) {
-                    
                     if (!eventProperties.hasOwnProperty("eventCategory")) {
                         eventProperties.eventCategory = "All"
                     }
                     eventProperties.eventAction = eventName;
-
-                    var tracker;
-                    try {
-                        tracker = ga.getAll()[0];
-                    } catch(e){}
-
-                    if (tracker) {
-                        tracker.send('event', eventProperties);
-                    } else {
-                        ga('send', 'event', eventProperties);
-                    }
+                    ga('send', 'event', eventProperties);
                 }
             }
         },
