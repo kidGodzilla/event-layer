@@ -155,34 +155,17 @@ var EventLayer = (function EventLayer () {
                         eventProperties.eventCategory = "All"
                     }
                     eventProperties.eventAction = eventName;
-                    ga('send', 'event', eventProperties);
+                    eventProperties.hitType = 'event'
+                    ga('send', eventProperties);
                 }
             },
-            page: function (category, name, properties) {
+            page: function (category, name, properties={}) {
                 if (window.ga) {
-                    var tracker;
-
-                    try {
-                        tracker = ga.getAll()[0];
-                    } catch(e){}
-
-                    // See: https://developers.google.com/analytics/devguides/collection/analyticsjs/pages
-
                     if (category) properties.category = category;
                     properties.hitType = 'pageview';
                     properties.page = name || properties.path;
                     properties.location = properties.url;
-
-                    if (tracker) {
-                        tracker.set(properties);
-                        tracker.send(properties);
-                    } else {
-                        ga('set', properties);
-                        ga('send', properties);
-                    }
-
-                    // Default (Simpler) approach used by GA default code snippet:
-                    // ga('send', 'pageview');
+                    ga('send', properties);
                 }
             }
         },
