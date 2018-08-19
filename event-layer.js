@@ -158,26 +158,23 @@ var EventLayer = (function EventLayer () {
                     }
                 }
             },
-            track: function (eventName, eventProperties) {
+            track: function (eventName, eventProperties = {}) {
                 if (window.ga) {
-                    var tracker;
+                    
+                    if (!eventProperties.hasOwnProperty("eventCategory")) {
+                        eventProperties.eventCategory = "All"
+                    }
+                    eventProperties.eventAction = eventName;
 
+                    var tracker;
                     try {
                         tracker = ga.getAll()[0];
                     } catch(e){}
 
                     if (tracker) {
-                        tracker.send('event', {
-                            hitType: 'event',
-                            eventCategory: 'All',
-                            eventAction: eventName
-                        });
+                        tracker.send('event', eventProperties);
                     } else {
-                        ga('send', {
-                            hitType: 'event',
-                            eventCategory: 'All',
-                            eventAction: eventName
-                        });
+                        ga('send', 'event', eventProperties);
                     }
                 }
             },
