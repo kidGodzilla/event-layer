@@ -217,11 +217,15 @@ var EventLayer = (function EventLayer () {
                 return ((window.Keen && window.Keen.loaded) || ((window.KeenAsync && window.KeenAsync.loaded))) && window.client;
             },
             identify: function (userId, userProperties) {
-                if (window.client && userId) client.extendEvents({
-                    'user_id': userId
-                });
+                try {
+                    if (window.client && userId) client.extendEvents({
+                        'user_id': userId
+                    });
 
-                if (window.client && userProperties) client.extendEvents(userProperties);
+                    if (window.client && userProperties) client.extendEvents(userProperties);
+                } catch(e){
+                    console.log(e);
+                }
             },
             track: function (eventName, eventProperties) {
                 if (window.client && eventName) client.recordEvent(eventName, eventProperties);
