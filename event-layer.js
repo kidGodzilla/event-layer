@@ -143,42 +143,29 @@ var EventLayer = (function EventLayer () {
             test: function () {
                 return window.ga;
             },
-            identify: function (userId, userProperties) {
+            identify: function (userId, userProperties = {}) {
                 if (window.ga) {
-                    var tracker;
-
-                    try {
-                        tracker = ga.getAll()[0];
-                    } catch(e){}
-
-                    if (tracker) {
-                        tracker.send('set', 'userId', userId);
-                    } else {
-                        ga('set', 'userId', userId);
-                    }
+                    userProperties.userId = userId
+                    ga('set', userProperties);
                 }
             },
-            track: function (eventName, eventProperties) {
+            track: function (eventName, eventProperties = {}) {
                 if (window.ga) {
-                    var tracker;
-
-                    try {
-                        tracker = ga.getAll()[0];
-                    } catch(e){}
-
-                    if (tracker) {
-                        tracker.send('event', {
-                            hitType: 'event',
-                            eventCategory: 'All',
-                            eventAction: eventName
-                        });
-                    } else {
-                        ga('send', {
-                            hitType: 'event',
-                            eventCategory: 'All',
-                            eventAction: eventName
-                        });
+                    if (!eventProperties.hasOwnProperty("eventCategory")) {
+                        eventProperties.eventCategory = "All"
                     }
+                    eventProperties.eventAction = eventName;
+                    eventProperties.hitType = 'event'
+                    ga('send', eventProperties);
+                }
+            },
+            page: function (category, name, properties={}) {
+                if (window.ga) {
+                    if (category) properties.category = category;
+                    properties.hitType = 'pageview';
+                    properties.page = name || properties.path;
+                    properties.location = properties.url;
+                    ga('send', properties);
                 }
             },
             page: function (category, name, properties) {
