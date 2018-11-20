@@ -87,7 +87,7 @@ var EventLayer = (function EventLayer () {
         'intercom': {
             enabled: true,
             test: function () {
-                return (window.Intercom && window.Intercom('getVisitorId')) ? true : false;
+                return (window.Intercom && window.Intercom('getVisitorId') && window.Intercom.booted) ? true : false;
             },
             identify: function (userId, userProperties) {
                 // Send the identify call to Intercom's JS library
