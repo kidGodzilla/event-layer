@@ -12,9 +12,9 @@ Demo: https://kidgodzilla.github.io/event-layer/
 
 ## Stats
 
-**Number of integrations:** 27
+**Number of integrations:** 30
 
-**Number of tested integrations fully tested / considered stable & production-ready:** 7
+**Number of tested integrations fully tested / considered stable & production-ready:** 14
 
 __Would you like to request an integration?__ Our current turn-around time is 72 hours (Add another week for testing). <a href="mailto:james@gumshoe.io">Email me</a> for more details. 
 
@@ -92,6 +92,7 @@ configuration later to send your data anywhere you need.
 - Inspectlet
 - Qualaroo
 - Customer.io
+- Crisp.chat (New!)
 
 
 ## Creating a new instance of EventLayer
