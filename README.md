@@ -151,15 +151,15 @@ This is similar to the `Track` method found in Mixpanel, Heap, and Analytics.js.
 
 ## EventLayer.page(category, name, properties)
 
-_This method has been implemented identially to Analytics.js. See documentation for more details. Feel free to open an issue if you have any questions!_
+_This method has been implemented identically to Analytics.js. See documentation for more details. Feel free to open an issue if you have any questions!_
 
 ## EventLayer.alias(userId, previousId)
 
-_This method has been implemented identially to Analytics.js. See documentation for more details. Feel free to open an issue if you have any questions!_
+_This method has been implemented identically to Analytics.js. See documentation for more details. Feel free to open an issue if you have any questions!_
 
 ## EventLayer.group(groupId, traits)
 
-_This method has been implemented identially to Analytics.js. See documentation for more details. Feel free to open an issue if you have any questions!_
+_This method has been implemented identically to Analytics.js. See documentation for more details. Feel free to open an issue if you have any questions!_
 
 ## EventLayer.fbTrack(eventName, eventProperties)
 

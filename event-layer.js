@@ -134,6 +134,11 @@ var EventLayer = (function EventLayer () {
                 console.log('tracking (Crisp): ', eventName, eventProperties);
                 if (window.$crisp && eventName)
                     $crisp.push(["set", "session:event", [ [ [ eventName, eventProperties ] ] ] ])
+            },
+            group: function (groupId, traits) {
+                // Send the group call to Segment's Analytics.js library
+                // console.log('group: ', groupId, traits);
+                if (window.$crisp && groupId) window.$crisp.push(["set", "session:segments", [ [ groupId ] ] ])
             }
         },
         'amplitude': {
