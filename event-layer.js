@@ -734,6 +734,15 @@ var EventLayer = (function EventLayer () {
         return obj;
     }
 
+    function runTest (f) {
+        try {
+            return f();
+        } catch (e) {
+            return false;
+        }
+        return false;
+    }
+
     function track (eventName, eventProperties, options, callback) {
         if (!thirdPartyAdapters) return; // Early return if there are no adapters
 
@@ -743,7 +752,7 @@ var EventLayer = (function EventLayer () {
             var adapter = thirdPartyAdapters[adapterName];
 
             // If this adapter passes it's own internal test (usually to detect if a specific source is available)
-            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
+            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && runTest(adapter.test())) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so it can be tracked
 
@@ -771,7 +780,7 @@ var EventLayer = (function EventLayer () {
             var adapter = thirdPartyAdapters[adapterName];
 
             // If this adapter passes it's own internal test (usually to detect if a specific source is available)
-            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
+            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && runTest(adapter.test())) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so it can be tracked
                 if (adapter.identify && typeof(adapter.identify) === 'function')
@@ -815,7 +824,7 @@ var EventLayer = (function EventLayer () {
             var adapter = thirdPartyAdapters[adapterName];
 
             // If this adapter passes it's own internal test (usually to detect if a specific source is available)
-            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
+            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && runTest(adapter.test())) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so it can be tracked
                 if (adapter.page && typeof(adapter.page) === 'function')
@@ -835,7 +844,7 @@ var EventLayer = (function EventLayer () {
             var adapter = thirdPartyAdapters[adapterName];
 
             // If this adapter passes it's own internal test (usually to detect if a specific source is available)
-            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
+            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && runTest(adapter.test())) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so we can perform a grouping
                 if (adapter.group && typeof(adapter.group) === 'function')
@@ -855,7 +864,7 @@ var EventLayer = (function EventLayer () {
             var adapter = thirdPartyAdapters[adapterName];
 
             // If this adapter passes it's own internal test (usually to detect if a specific source is available)
-            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
+            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && runTest(adapter.test())) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so we can alias this user
                 if (adapter.alias && typeof(adapter.alias) === 'function')
@@ -894,7 +903,7 @@ var EventLayer = (function EventLayer () {
             if (adapterName === 'facebook-tracking-pixel') continue; // Skip FB Tracking pixel
 
             // If this adapter passes it's own internal test (usually to detect if a specific source is available)
-            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
+            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && runTest(adapter.test())) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so it can be tracked
                 if (adapter.facebookTrackEvent && typeof(adapter.facebookTrackEvent) === 'function') {
