@@ -109,7 +109,7 @@ var EventLayer = (function EventLayer () {
         'crisp': {
             enabled: true,
             test: function () {
-                return (window.$crisp && window.$crisp.help && window.$crisp.set && window.$crisp.get('session:identifier')) ? true : false;
+                return (window.$crisp && window.$crisp.push && window.$crisp.get('session:identifier')) ? true : false;
             },
             identify: function (userId, userProperties) {
                 // Send the identify call to Crisp.chat's JS library
@@ -117,23 +117,28 @@ var EventLayer = (function EventLayer () {
 
                 // morph user property hash into array
                 for (var k in userProperties) {
-                    var v = userProperties[k]
+                    var v = userProperties[k];
 
                     if (k !== 'email' && k !== 'company') newArr.push([k, v]);
                 }
 
-                console.log('Identifying (Crisp): ', newArr);
+                // console.log('Identifying (Crisp): ', newArr);
 
                 // Set people properties on our identified user
                 if (window.$crisp && userProperties)
-                    $crisp.push(["set", "session:data", [ newArr ] ] )
+                    $crisp.push(["set", "session:data", newArr ] )
 
             },
             track: function (eventName, eventProperties) {
                 // Send the tracked event to Crisp.chat's JS library
                 console.log('tracking (Crisp): ', eventName, eventProperties);
                 if (window.$crisp && eventName)
-                    $crisp.push(["set", "session:event", [ [ [ eventName, eventProperties ] ] ] ])
+                    $crisp.push(["set", "session:event", [ eventName, eventProperties ] ])
+            },
+            group: function (groupId, traits) {
+                // Send the group call to Segment's Analytics.js library
+                // console.log('group: ', groupId, traits);
+                if (window.$crisp && groupId) window.$crisp.push(["set", "session:segments", [ groupId ] ])
             }
         },
         'amplitude': {

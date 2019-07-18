@@ -1,6 +1,6 @@
 {
   "name": "event-layer",
-  "version": "0.2.18",
+  "version": "0.2.19",
   "description": "A very simple abstraction layer for analytics code. Write your events once, then send them where ever you want.",
   "main": "event-layer.js",
   "types": "index.d.ts",  
