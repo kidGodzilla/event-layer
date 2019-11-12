@@ -178,13 +178,17 @@ var EventLayer = (function EventLayer () {
             test: function () {
                 return window.ga;
             },
-            identify: function (userId, userProperties = {}) {
+            identify: function (userId, userProperties) {
+                if (!userProperties) userProperties = {};
+
                 if (window.ga) {
                     userProperties.userId = userId
                     ga('set', userProperties);
                 }
             },
-            track: function (eventName, eventProperties = {}) {
+            track: function (eventName, eventProperties) {
+                if (!eventProperties) eventProperties = {};
+
                 if (window.ga) {
                     if (!eventProperties.hasOwnProperty("eventCategory")) {
                         eventProperties.eventCategory = "All"
