@@ -31,11 +31,7 @@ Once installed, you'll need to include `event-layer.js` in your project, and the
 
 ## Installation via CDN
 
-Include one of the following scripts in your project:
-
-`https://unpkg.com/event-layer@latest/event-layer.js`
-
-or alternatively:
+Include the following scripts in your project:
 
 `https://cdn.jsdelivr.net/npm/event-layer@latest/event-layer.js`
 
