@@ -132,7 +132,7 @@ var EventLayer = (function EventLayer () {
         'crisp': {
             enabled: true,
             test: function () {
-                return (window.$crisp && window.$crisp.push && window.$crisp.get('session:identifier')) ? true : false;
+                return (window.$crisp && window.$crisp.push && window.$crisp.get && window.$crisp.get('session:identifier')) ? true : false;
             },
             identify: function (userId, userProperties) {
                 // Send the identify call to Crisp.chat's JS library
