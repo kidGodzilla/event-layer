@@ -12,9 +12,9 @@ Demo: https://kidgodzilla.github.io/event-layer/
 
 ## Stats
 
-**Number of integrations:** 27
+**Number of integrations:** 30
 
-**Number of tested integrations fully tested / considered stable & production-ready:** 7
+**Number of tested integrations fully tested / considered stable & production-ready:** 14
 
 __Would you like to request an integration?__ Our current turn-around time is 72 hours (Add another week for testing). <a href="mailto:james@gumshoe.io">Email me</a> for more details. 
 
@@ -31,11 +31,7 @@ Once installed, you'll need to include `event-layer.js` in your project, and the
 
 ## Installation via CDN
 
-Include one of the following scripts in your project:
-
-`https://unpkg.com/event-layer@latest/event-layer.js`
-
-or alternatively:
+Include the following scripts in your project:
 
 `https://cdn.jsdelivr.net/npm/event-layer@latest/event-layer.js`
 
@@ -92,6 +88,7 @@ configuration later to send your data anywhere you need.
 - Inspectlet
 - Qualaroo
 - Customer.io
+- Crisp.chat (New!)
 
 
 ## Creating a new instance of EventLayer
@@ -150,15 +147,15 @@ This is similar to the `Track` method found in Mixpanel, Heap, and Analytics.js.
 
 ## EventLayer.page(category, name, properties)
 
-_This method has been implemented identially to Analytics.js. See documentation for more details. Feel free to open an issue if you have any questions!_
+_This method has been implemented identically to Analytics.js. See documentation for more details. Feel free to open an issue if you have any questions!_
 
 ## EventLayer.alias(userId, previousId)
 
-_This method has been implemented identially to Analytics.js. See documentation for more details. Feel free to open an issue if you have any questions!_
+_This method has been implemented identically to Analytics.js. See documentation for more details. Feel free to open an issue if you have any questions!_
 
 ## EventLayer.group(groupId, traits)
 
-_This method has been implemented identially to Analytics.js. See documentation for more details. Feel free to open an issue if you have any questions!_
+_This method has been implemented identically to Analytics.js. See documentation for more details. Feel free to open an issue if you have any questions!_
 
 ## EventLayer.fbTrack(eventName, eventProperties)
 
