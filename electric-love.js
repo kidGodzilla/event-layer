@@ -87,7 +87,7 @@ var EventLayer = (function EventLayer () {
         'intercom': {
             enabled: true,
             test: function () {
-                return (window.Intercom && window.Intercom('getVisitorId')) ? true : false;
+                return (window.Intercom && window.Intercom('getVisitorId') && window.Intercom.booted) ? true : false;
             },
             identify: function (userId, userProperties) {
                 // Send the identify call to Intercom's JS library
@@ -179,41 +179,35 @@ var EventLayer = (function EventLayer () {
                 return window.ga;
             },
             identify: function (userId, userProperties) {
+                if (!userProperties) userProperties = {};
+
                 if (window.ga) {
-                    var tracker;
-
-                    try {
-                        tracker = ga.getAll()[0];
-                    } catch(e){}
-
-                    if (tracker) {
-                        tracker.send('set', 'userId', userId);
-                    } else {
-                        ga('set', 'userId', userId);
-                    }
+                    userProperties.userId = userId;
+                    ga('set', userProperties);
                 }
             },
             track: function (eventName, eventProperties) {
+                if (!eventProperties) eventProperties = {};
+
                 if (window.ga) {
-                    var tracker;
-
-                    try {
-                        tracker = ga.getAll()[0];
-                    } catch(e){}
-
-                    if (tracker) {
-                        tracker.send('event', {
-                            hitType: 'event',
-                            eventCategory: 'All',
-                            eventAction: eventName
-                        });
-                    } else {
-                        ga('send', {
-                            hitType: 'event',
-                            eventCategory: 'All',
-                            eventAction: eventName
-                        });
+                    if (!eventProperties.hasOwnProperty("eventCategory")) {
+                        eventProperties.eventCategory = "All"
                     }
+                    eventProperties.eventAction = eventName;
+                    eventProperties.hitType = 'event';
+                    ga('send', eventProperties);
+                }
+            },
+            page: function (category, name, properties) {
+
+                if (!properties) properties = {};
+
+                if (window.ga) {
+                    if (category) properties.category = category;
+                    properties.hitType = 'pageview';
+                    properties.page = name || properties.path;
+                    properties.location = properties.url;
+                    ga('send', properties);
                 }
             },
             page: function (category, name, properties) {
@@ -226,11 +220,10 @@ var EventLayer = (function EventLayer () {
 
                     // See: https://developers.google.com/analytics/devguides/collection/analyticsjs/pages
 
-                    properties.hitTime = 'pageview';
+                    if (category) properties.category = category;
+                    properties.hitType = 'pageview';
                     properties.page = name || properties.path;
                     properties.location = properties.url;
-
-                    if (category) properties.category = category;
 
                     if (tracker) {
                         tracker.set(properties);
@@ -253,11 +246,15 @@ var EventLayer = (function EventLayer () {
                 return ((window.Keen && window.Keen.loaded) || ((window.KeenAsync && window.KeenAsync.loaded))) && window.client;
             },
             identify: function (userId, userProperties) {
-                if (window.client && userId) client.extendEvents({
-                    'user_id': userId
-                });
+                try {
+                    if (window.client && userId) client.extendEvents({
+                        'user_id': userId
+                    });
 
-                if (window.client && userProperties) client.extendEvents(userProperties);
+                    if (window.client && userProperties) client.extendEvents(userProperties);
+                } catch(e){
+                    console.log(e);
+                }
             },
             track: function (eventName, eventProperties) {
                 if (window.client && eventName) client.recordEvent(eventName, eventProperties);
@@ -744,6 +741,15 @@ var EventLayer = (function EventLayer () {
         return obj;
     }
 
+    function runTest (f) {
+        try {
+            return f();
+        } catch (e) {
+            return false;
+        }
+        return false;
+    }
+
     function track (eventName, eventProperties, options, callback) {
         if (!thirdPartyAdapters) return; // Early return if there are no adapters
 
@@ -753,7 +759,7 @@ var EventLayer = (function EventLayer () {
             var adapter = thirdPartyAdapters[adapterName];
 
             // If this adapter passes it's own internal test (usually to detect if a specific source is available)
-            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
+            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && runTest(adapter.test())) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so it can be tracked
 
@@ -781,7 +787,7 @@ var EventLayer = (function EventLayer () {
             var adapter = thirdPartyAdapters[adapterName];
 
             // If this adapter passes it's own internal test (usually to detect if a specific source is available)
-            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
+            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && runTest(adapter.test())) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so it can be tracked
                 if (adapter.identify && typeof(adapter.identify) === 'function')
@@ -825,7 +831,7 @@ var EventLayer = (function EventLayer () {
             var adapter = thirdPartyAdapters[adapterName];
 
             // If this adapter passes it's own internal test (usually to detect if a specific source is available)
-            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
+            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && runTest(adapter.test())) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so it can be tracked
                 if (adapter.page && typeof(adapter.page) === 'function')
@@ -845,7 +851,7 @@ var EventLayer = (function EventLayer () {
             var adapter = thirdPartyAdapters[adapterName];
 
             // If this adapter passes it's own internal test (usually to detect if a specific source is available)
-            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
+            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && runTest(adapter.test())) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so we can perform a grouping
                 if (adapter.group && typeof(adapter.group) === 'function')
@@ -865,7 +871,7 @@ var EventLayer = (function EventLayer () {
             var adapter = thirdPartyAdapters[adapterName];
 
             // If this adapter passes it's own internal test (usually to detect if a specific source is available)
-            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
+            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && runTest(adapter.test())) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so we can alias this user
                 if (adapter.alias && typeof(adapter.alias) === 'function')
@@ -904,7 +910,7 @@ var EventLayer = (function EventLayer () {
             if (adapterName === 'facebook-tracking-pixel') continue; // Skip FB Tracking pixel
 
             // If this adapter passes it's own internal test (usually to detect if a specific source is available)
-            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && adapter.test()) {
+            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && runTest(adapter.test())) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so it can be tracked
                 if (adapter.facebookTrackEvent && typeof(adapter.facebookTrackEvent) === 'function') {

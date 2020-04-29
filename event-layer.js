@@ -182,7 +182,7 @@ var EventLayer = (function EventLayer () {
                 if (!userProperties) userProperties = {};
 
                 if (window.ga) {
-                    userProperties.userId = userId
+                    userProperties.userId = userId;
                     ga('set', userProperties);
                 }
             },
@@ -194,11 +194,14 @@ var EventLayer = (function EventLayer () {
                         eventProperties.eventCategory = "All"
                     }
                     eventProperties.eventAction = eventName;
-                    eventProperties.hitType = 'event'
+                    eventProperties.hitType = 'event';
                     ga('send', eventProperties);
                 }
             },
-            page: function (category, name, properties={}) {
+            page: function (category, name, properties) {
+
+                if (!properties) properties = {};
+
                 if (window.ga) {
                     if (category) properties.category = category;
                     properties.hitType = 'pageview';
