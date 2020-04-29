@@ -232,6 +232,25 @@ track: function (eventName, eventProperties) {
 
 (A simple example taken from the Heap Analytics adapter)
 
+## Adding or modifying an adapter on the fly
+You can add or modify an adapter on the fly, after you instantiate EventLayer, by calling the `addAdapter` method.
+
+```
+Analytics.addAdapter('my-analytics', {
+    enabled: true,
+    test: function () { return true },
+    track: function (eventName, eventProperties) { console.log('tracking') }
+});
+```
+
+## Debugging
+
+You can set `window.__debug` to `true` to enable debugging (console output) for EventLayer.
+
+```
+window.__debug = true;
+```
+
 
 ## Pull Requests
 

@@ -967,6 +967,9 @@ var EventLayer = (function EventLayer () {
 
             // If this adapter passes it's own internal test (usually to detect if a specific source is available)
             if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && runTest(adapter.test)) {
+
+                if (window.__debug) console.log('fbTrack method executing on', adapterName);
+
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so it can be tracked
                 if (adapter.facebookTrackEvent && typeof(adapter.facebookTrackEvent) === 'function') {
@@ -1007,6 +1010,18 @@ var EventLayer = (function EventLayer () {
     setTimeout(onReady, 5000);
 
 
+    /**
+     * Add an adapter on the fly for testing or modifying EventLayer on your own
+     */
+    function addAdapter (namespace, adapter) {
+        if (typeof adapter !== 'object') return;
+
+        if (thirdPartyAdapters[namespace]) console.warn('Adapter for namespace ' + namespace + ' already exists, and is being overwritten.');
+        else if (window.__debug) console.log('Adapter for ' + namespace + ' added.');
+
+        thirdPartyAdapters[namespace] = adapter;
+    }
+
     // Todo:
     // QueryString API?
     // Selecting Integrations should match analytics.js syntax
@@ -1014,6 +1029,7 @@ var EventLayer = (function EventLayer () {
     // Create / export globals
     window.EventLayer = {};
     EventLayer.thirdPartyAdapters = thirdPartyAdapters;
+    EventLayer.addAdapter = addAdapter;
     EventLayer.readyFunction = null;
     EventLayer.Integrations = null; // This needs to be null so that it's not confused with Segment.com's library.
     EventLayer.identify = identify;
