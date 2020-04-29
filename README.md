@@ -8,18 +8,17 @@
 
 A very very simple abstraction layer for analytics code. Write your events once, then send them where ever you want.
 
-Demo: https://kidgodzilla.github.io/event-layer/
+### [Demo](https://kidgodzilla.github.io/event-layer/)
 
 ## Stats
 
-**Number of integrations:** 30
+**Number of integrations:** 32
 
 **Number of tested integrations fully tested / considered stable & production-ready:** 14
 
-__Would you like to request an integration?__ Our current turn-around time is 72 hours (Add another week for testing). <a href="mailto:james@gumshoe.io">Email me</a> for more details. 
+__Would you like to request an integration?__ We'd love to help out! [Open an issue](https://github.com/kidGodzilla/event-layer/issues/new) to get started. 
 
-If the docs are publicly available or it's supported by Analytics.js, I can turn around an implementation in 72 hours. 
-All I ask is that you make yourself available for testing / verification (this usually takes about a week).
+If the docs are publicly available or it's supported by Analytics.js, it should be even easier. Link any docs you may have for Analytics.js or the Javascript API, where available.
 
 ## Installation via NPM
 
@@ -58,38 +57,42 @@ configuration later to send your data anywhere you need.
 
 ## Integrations / Services Currently Supported
 
-- Segment.com
-- Mixpanel
-- Google Analytics
-- Facebook Tracking Pixel
-- Google Tag Manager
-- Heap
-- Intercom
-- Amplitude
-- Keen.io
-- Helpscout
-- Fullstory
-- Olark
-- Calq
-- Sentry
-- Castle
-- Rollbar
-- Talkus
-- Crazy Egg
-- Elev.io
-- Drift
-- Drip
-- Lucky Orange
-- BugHerd
-- Bugsnag
-- Chameleon
-- Hello Bar
-- Improvely
-- Inspectlet
-- Qualaroo
-- Customer.io
-- Crisp.chat (New!)
+Integration | Stable
+------------ | -------------
+Segment.com | ✔️
+Mixpanel | ✔️
+Google Analytics | ✔️
+Crisp.chat (New!) | ✔️
+PostHog (New!) | ✔️
+Intercom | ✔️
+Sentry | ✔️
+Facebook Tracking Pixel | ✔️
+Google Tag Manager | ✔️
+Heap | ✔️
+Amplitude | ✔️
+Keen.io | ✔️
+Helpscout
+Fullstory
+Olark
+Calq
+Castle
+Rollbar | ✔️
+Talkus | ✔️
+Crazy Egg | ✔️
+Elev.io | ✔️
+Drift | ✔️
+Drip | ✔️
+Lucky Orange
+BugHerd
+Bugsnag
+Chameleon
+Hello Bar | ✔️
+Improvely | ✔️
+Inspectlet
+Qualaroo
+Customer.io
 
+*We rely on users to report their usage. Feel free to open an issue just to say "I tested ____, and it works!"
 
 ## Creating a new instance of EventLayer
 We realize that not everyone wants to litter their code with calls to a global named **“Event Layer”**. So you'll probably want to start off by instantiating a new instance of **“Event Layer”**.
