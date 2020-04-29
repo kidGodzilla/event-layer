@@ -62,8 +62,8 @@ Integration | Stable
 Segment.com | ✔️
 Mixpanel | ✔️
 Google Analytics | ✔️
-Crisp.chat (New!) | ✔️
 PostHog (New!) | ✔️
+Crisp.chat | ✔️
 Intercom | ✔️
 Sentry | ✔️
 Facebook Tracking Pixel | ✔️
@@ -71,26 +71,26 @@ Google Tag Manager | ✔️
 Heap | ✔️
 Amplitude | ✔️
 Keen.io | ✔️
-Helpscout
-Fullstory
-Olark
-Calq
-Castle
 Rollbar | ✔️
 Talkus | ✔️
 Crazy Egg | ✔️
 Elev.io | ✔️
 Drift | ✔️
 Drip | ✔️
-Lucky Orange
-BugHerd
-Bugsnag
-Chameleon
 Hello Bar | ✔️
 Improvely | ✔️
-Inspectlet
-Qualaroo
-Customer.io
+Helpscout | 
+Fullstory | 
+Olark | 
+Calq | 
+Castle | 
+Lucky Orange | 
+BugHerd | 
+Bugsnag | 
+Chameleon | 
+Inspectlet | 
+Qualaroo | 
+Customer.io | 
 
 *We rely on users to report their usage. Feel free to open an issue just to say "I tested ____, and it works!"
 
