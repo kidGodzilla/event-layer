@@ -106,6 +106,31 @@ var EventLayer = (function EventLayer () {
                     Intercom('trackEvent', eventName, eventProperties);
             }
         },
+        'posthog': {
+            enabled: true,
+            test: function () {
+                return (window.posthog && posthog.__loaded) ? true : false;
+            },
+            identify: function (userId, userProperties) {
+                // Send the identify call to Posthog's JS library
+                // console.log('Identifying: ', userId, userProperties);
+                if (window.posthog && userId)
+                    posthog.identify(userId);
+
+                // Set people properties on our identified user
+                if (window.posthog && userProperties)
+                    posthog.people.set(userProperties); // Just this session!
+
+                if (window.posthog && userProperties)
+                    posthog.register(userProperties); // These persist across sessions
+            },
+            track: function (eventName, eventProperties) {
+                // Send the tracked event to Posthog's JS library
+                // console.log('tracking: ', eventName, eventProperties);
+                if (window.posthog && eventName)
+                    posthog.capture(eventName, eventProperties);
+            }
+        },
         'crisp': {
             enabled: true,
             test: function () {
