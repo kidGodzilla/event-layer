@@ -1,7 +1,5 @@
 var EventLayer = (function EventLayer () {
 
-    var that = this;
-
     /**
      * Third-party adapters for EventLayer.track(), EventLayer.identify(), etc.
      */
@@ -740,6 +738,25 @@ var EventLayer = (function EventLayer () {
                 window._cio.page(location.href, properties);
             }
         },
+        'debug': { // This sends some debugging messages if enabled
+            enabled: true,
+            test: function () { return !!window.__debug },
+            track: function (eventName, eventProperties) {
+                console.log('Track:', eventName, eventProperties);
+            },
+            identify: function (userId, userProperties) {
+                console.log('Identify:', userId, userProperties);
+            },
+            page: function (category, name, properties) {
+                console.log('Page:', category, name, properties);
+            },
+            alias: function (userId, previousId) {
+                console.log('Alias:', userId, previousId);
+            },
+            group: function (groupId, traits) {
+                console.log('Group:', groupId, traits);
+            }
+        },
         'blank-adapter-template': { // Do not modify this template
             enabled: false,
             test: function () {},
@@ -784,9 +801,11 @@ var EventLayer = (function EventLayer () {
             var adapter = thirdPartyAdapters[adapterName];
 
             // If this adapter passes it's own internal test (usually to detect if a specific source is available)
-            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && runTest(adapter.test())) {
+            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && runTest(adapter.test)) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so it can be tracked
+
+                if (window.__debug) console.log('Track method executing on', adapterName);
 
                 // If TRANSLATE_EVENT_NAMES exists, use it to translate event names
                 if (window.TRANSLATE_EVENT_NAMES && typeof window.TRANSLATE_EVENT_NAMES === 'object')
@@ -812,9 +831,12 @@ var EventLayer = (function EventLayer () {
             var adapter = thirdPartyAdapters[adapterName];
 
             // If this adapter passes it's own internal test (usually to detect if a specific source is available)
-            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && runTest(adapter.test())) {
+            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && runTest(adapter.test)) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so it can be tracked
+
+                if (window.__debug) console.log('Identify method executing on', adapterName);
+
                 if (adapter.identify && typeof(adapter.identify) === 'function')
                     adapter.identify(userId, userProperties);
             }
@@ -856,7 +878,10 @@ var EventLayer = (function EventLayer () {
             var adapter = thirdPartyAdapters[adapterName];
 
             // If this adapter passes it's own internal test (usually to detect if a specific source is available)
-            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && runTest(adapter.test())) {
+            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && runTest(adapter.test)) {
+
+                if (window.__debug) console.log('Page method executing on', adapterName);
+
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so it can be tracked
                 if (adapter.page && typeof(adapter.page) === 'function')
@@ -876,7 +901,10 @@ var EventLayer = (function EventLayer () {
             var adapter = thirdPartyAdapters[adapterName];
 
             // If this adapter passes it's own internal test (usually to detect if a specific source is available)
-            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && runTest(adapter.test())) {
+            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && runTest(adapter.test)) {
+
+                if (window.__debug) console.log('Group method executing on', adapterName);
+
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so we can perform a grouping
                 if (adapter.group && typeof(adapter.group) === 'function')
@@ -896,7 +924,10 @@ var EventLayer = (function EventLayer () {
             var adapter = thirdPartyAdapters[adapterName];
 
             // If this adapter passes it's own internal test (usually to detect if a specific source is available)
-            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && runTest(adapter.test())) {
+            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && runTest(adapter.test)) {
+
+                if (window.__debug) console.log('Alias method executing on', adapterName);
+
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so we can alias this user
                 if (adapter.alias && typeof(adapter.alias) === 'function')
@@ -935,7 +966,7 @@ var EventLayer = (function EventLayer () {
             if (adapterName === 'facebook-tracking-pixel') continue; // Skip FB Tracking pixel
 
             // If this adapter passes it's own internal test (usually to detect if a specific source is available)
-            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && runTest(adapter.test())) {
+            if (adapter.enabled && adapter.test && typeof(adapter.test) === 'function' && runTest(adapter.test)) {
                 // If everything checks out for the data we've received,
                 // pass the data to the adapter so it can be tracked
                 if (adapter.facebookTrackEvent && typeof(adapter.facebookTrackEvent) === 'function') {
@@ -958,6 +989,8 @@ var EventLayer = (function EventLayer () {
      * Event Layer defaults
      */
     function ready (callback) {
+        if (window.__debug) console.log('Event Layer Ready');
+
         if (callback && typeof(callback) === 'function')
             EventLayer.readyFunction = callback;
     }
