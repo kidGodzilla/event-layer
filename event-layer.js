@@ -1,4 +1,7 @@
 var EventLayer = (function EventLayer () {
+    if (typeof window === 'undefined') {
+        window = { __node: !!global };
+    }
 
     /**
      * Third-party adapters for EventLayer.track(), EventLayer.identify(), etc.
@@ -738,6 +741,19 @@ var EventLayer = (function EventLayer () {
                 window._cio.page(location.href, properties);
             }
         },
+        'logspot': { // This sends some debugging messages if enabled
+            enabled: true,
+            test: function () { return !!window.Logspot && Logspot.track },
+            track: function (eventName, eventProperties) {
+                // console.log('Track:', eventName, eventProperties);
+
+                window.Logspot.track({
+                    event: eventName,
+                    userId: window.__currentUserId,
+                    metadata: eventProperties,
+                });
+            },
+        },
         'debug': { // This sends some debugging messages if enabled
             enabled: true,
             test: function () { return !!window.__debug },
@@ -1048,3 +1064,10 @@ var EventLayer = (function EventLayer () {
     };
 
 })();
+
+if (typeof module !== 'undefined') {
+    module.exports = function () {
+        // console.log('opts', opts);
+        return EventLayer();
+    }
+}

@@ -91,6 +91,7 @@ Chameleon |
 Inspectlet | 
 Qualaroo | 
 Customer.io | 
+Logspot.io |
 
 *We rely on users to report their usage. Feel free to open an issue just to say "I tested ____, and it works!"
 
