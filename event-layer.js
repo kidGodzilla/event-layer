@@ -179,20 +179,21 @@ var EventLayer = (function EventLayer () {
                 for (var k in userProperties) {
                     var v = userProperties[k];
 
-                    if (k !== 'email' && k !== 'company') newArr.push([k, v]);
+                    if (k !== 'email' && k !== 'company' && k && v && typeof k === 'string') {
+                        newArr.push([k, v]);
+                    }
                 }
 
                 // console.log('Identifying (Crisp): ', newArr);
 
                 // Set people properties on our identified user
-                if (window.$crisp && userProperties)
-                    $crisp.push(["set", "session:data", newArr ] )
-
+                if (window.$crisp && userProperties && newArr.length === 2)
+                    $crisp.push(["set", "session:data", newArr ] );
             },
             track: function (eventName, eventProperties) {
                 // Send the tracked event to Crisp.chat's JS library
                 console.log('tracking (Crisp): ', eventName, eventProperties);
-                if (window.$crisp && eventName)
+                if (window.$crisp && eventName && eventProperties)
                     $crisp.push(["set", "session:event", [ eventName, eventProperties ] ])
             },
             group: function (groupId, traits) {
