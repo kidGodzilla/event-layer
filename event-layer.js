@@ -189,6 +189,32 @@ var EventLayer = (function EventLayer () {
                 }
             },
         },
+        'june': {
+            enabled: true,
+            test: function () {
+                return (window.juneify && typeof window.juneify === 'function' && window.analytics && window.analytics.initialized) ? true : false;
+            },
+            identify: function (userId, userProperties) {
+                // Send the identify call to June.so's JS library
+                // console.log('Identifying: ', userId, userProperties);
+                if (window.analytics && userId)
+                    window.analytics.identify(userId, userProperties);
+            },
+            track: function (eventName, eventProperties) {
+                // Send the tracked event to June.so's JS library
+                // console.log('tracking: ', eventName, eventProperties);
+                if (window.analytics && eventName)
+                    window.analytics.track(eventName, eventProperties);
+            },
+            page: function (category, name, properties) {
+                if (window.analytics) window.analytics.page();
+            },
+            group: function (groupId, traits) {
+                // Send the group call to June.so's JS library
+                // console.log('group: ', groupId, traits);
+                if (window.analytics && groupId) window.analytics.group(groupId, traits);
+            }
+        },
         'crisp': {
             enabled: true,
             test: function () {

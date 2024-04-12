@@ -64,6 +64,7 @@ Mixpanel | ✔️
 Google Analytics | ✔️
 PostHog | ✔️
 Beam Analytics (New!) | ✔️
+June.so (New!) | ✔️
 Crisp.chat | ✔️
 Intercom | ✔️
 Sentry | ✔️
