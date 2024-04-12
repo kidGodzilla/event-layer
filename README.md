@@ -62,7 +62,8 @@ Integration | Stable
 Segment.com | ✔️
 Mixpanel | ✔️
 Google Analytics | ✔️
-PostHog (New!) | ✔️
+PostHog | ✔️
+Beam Analytics (New!) | ✔️
 Crisp.chat | ✔️
 Intercom | ✔️
 Sentry | ✔️
