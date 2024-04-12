@@ -144,27 +144,50 @@ var EventLayer = (function EventLayer () {
         'posthog': {
             enabled: true,
             test: function () {
-                return (window.posthog && posthog.__loaded) ? true : false;
+                return (window.posthog && window.posthog.__loaded) ? true : false;
             },
             identify: function (userId, userProperties) {
                 // Send the identify call to Posthog's JS library
                 // console.log('Identifying: ', userId, userProperties);
                 if (window.posthog && userId)
-                    posthog.identify(userId);
+                    window.posthog.identify(userId, userProperties);
 
-                // Set people properties on our identified user
-                if (window.posthog && userProperties)
-                    posthog.people.set(userProperties); // Just this session!
+                // Deprecated in Posthog
+                // // Set people properties on our identified user
+                // if (window.posthog && userProperties)
+                //     window.posthog.people.set(userProperties); // Just this session!
 
-                if (window.posthog && userProperties)
-                    posthog.register(userProperties); // These persist across sessions
+                // if (window.posthog && userProperties)
+                //     window.posthog.register(userProperties); // These persist across sessions
             },
             track: function (eventName, eventProperties) {
                 // Send the tracked event to Posthog's JS library
                 // console.log('tracking: ', eventName, eventProperties);
                 if (window.posthog && eventName)
-                    posthog.capture(eventName, eventProperties);
+                    window.posthog.capture(eventName, eventProperties);
+            },
+            page: function (category, name, properties) {
+                if (window.posthog) window.posthog.capture('$pageview');
+            },
+            group: function (groupId, traits) {
+                // Send the group call to Posthog's JS library
+                // console.log('group: ', groupId, traits);
+                if (window.posthog && groupId) window.posthog.group(groupId, traits);
             }
+        },
+        'beamanalytics': {
+            enabled: true,
+            test: function () {
+                return (window.beam && typeof window.beam === 'function') ? true : false;
+            },
+            track: function (eventName, eventProperties) {
+                // Send the tracked event to Beam analytics JS library
+                console.log('tracking (Beam Analytics custom event): ', eventName, eventProperties);
+                if (window.beam && eventName) {
+                    var sanitized = eventName.toLowerCase().replace(/[\n\t\s]/g, '_').replace(/[-._~:/?#[\]@!$&'()*+,;=]+/g, '_');
+                    window.beam("/custom-events/" + sanitized);
+                }
+            },
         },
         'crisp': {
             enabled: true,
