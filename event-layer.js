@@ -182,7 +182,7 @@ var EventLayer = (function EventLayer () {
             },
             track: function (eventName, eventProperties) {
                 // Send the tracked event to Beam analytics JS library
-                console.log('tracking (Beam Analytics custom event): ', eventName, eventProperties);
+                // console.log('tracking (Beam Analytics custom event): ', eventName, eventProperties);
                 if (window.beam && eventName) {
                     var sanitized = eventName.toLowerCase().replace(/[\n\t\s]/g, '_').replace(/[-._~:/?#[\]@!$&'()*+,;=]+/g, '_');
                     window.beam("/custom-events/" + sanitized);
@@ -207,7 +207,7 @@ var EventLayer = (function EventLayer () {
                     window.analytics.track(eventName, eventProperties);
             },
             page: function (category, name, properties) {
-                if (window.analytics) window.analytics.page();
+                if (window.analytics) window.analytics.page(category, name, properties);
             },
             group: function (groupId, traits) {
                 // Send the group call to June.so's JS library
@@ -241,7 +241,7 @@ var EventLayer = (function EventLayer () {
             },
             track: function (eventName, eventProperties) {
                 // Send the tracked event to Crisp.chat's JS library
-                console.log('tracking (Crisp): ', eventName, eventProperties);
+                // console.log('tracking (Crisp): ', eventName, eventProperties);
                 if (window.$crisp && eventName && eventProperties)
                     $crisp.push(["set", "session:event", [ eventName, eventProperties ] ])
             },
