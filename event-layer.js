@@ -838,6 +838,18 @@ var EventLayer = (function EventLayer () {
                 });
             },
         },
+        'telemetry': { // This sends some debugging messages if enabled
+            enabled: true,
+            test: function () { return !!window.TELEMETRY && window.TELEMETRY_ENABLED },
+            track: function (eventName, eventProperties) {
+                // console.log('Track:', eventName, eventProperties);
+                window.TELEMETRY.track( eventName, eventProperties );
+            },
+            identify: function (userId, userProperties) {
+                // console.log('Track:', eventName, eventProperties);
+                window.TELEMETRY.identify( userId, userProperties );
+            },
+        },
         'debug': { // This sends some debugging messages if enabled
             enabled: true,
             test: function () { return !!window.__debug },
